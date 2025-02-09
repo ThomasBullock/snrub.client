@@ -26,12 +26,24 @@
         <label for="email2" class="block text-surface-900 dark:text-surface-0 font-medium mb-2"
           >Email</label
         >
-        <InputText id="email2" type="text" placeholder="Email address" class="w-full mb-4 p-4" />
+        <InputText
+          id="email2"
+          v-model="email"
+          type="text"
+          placeholder="Email address"
+          class="w-full mb-4 p-4"
+        />
 
         <label for="password2" class="block text-surface-900 dark:text-surface-0 font-medium mb-2"
           >Password</label
         >
-        <InputText id="password2" type="password" placeholder="Password" class="w-full mb-4 p-4" />
+        <InputText
+          id="password2"
+          v-model="password"
+          type="password"
+          placeholder="Password"
+          class="w-full mb-4 p-4"
+        />
 
         <div class="flex items-center justify-between mb-12">
           <div class="flex items-center">
@@ -43,7 +55,13 @@
           >
         </div>
 
-        <Button label="Sign In" severity="secondary" icon="pi pi-user" class="w-full p-4" />
+        <Button
+          @click="login"
+          label="Sign In"
+          severity="secondary"
+          icon="pi pi-user"
+          class="w-full p-4"
+        />
       </div>
     </div>
     <div
@@ -55,8 +73,25 @@
 import Button from "primevue/button";
 import Checkbox from "primevue/checkbox";
 import InputText from "primevue/inputtext";
+import api from "@/services/httpService";
 
 import { ref } from "vue";
+
+const email = ref("");
+const password = ref("");
+
+function login() {
+  console.log("login");
+
+  api.auth
+    .login({
+      email: email.value,
+      password: password.value,
+    })
+    .then((res) => {
+      console.log(res.data);
+    });
+}
 
 const checked2 = ref(true);
 </script>
