@@ -96,7 +96,8 @@ function login() {
       email: email.value,
       password: password.value,
     })
-    .then((res) => {
+    .then((res: any) => {
+      // should use a more specific type for the API response instead of any
       console.log(res.data);
     });
 }

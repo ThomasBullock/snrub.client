@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "types": ["node"]
+    "types": ["node", "vite/client"],
+    "isolatedModules": true,
+    "skipLibCheck": true
   },
   "files": [],
   "references": [
@@ -14,5 +16,5 @@
       "path": "./tsconfig.vitest.json"
     }
   ],
-  "include": ["src", "vite-env.d.ts"]
+  "include": []
 }
