@@ -15,37 +15,45 @@ interface AuthResponse {
   user: User;
 }
 
-export const useAuthStore = defineStore("auth", () => {
-  const user = ref<User | null>(null);
-  const token = ref<string | null>(null);
+export const useAuthStore = defineStore(
+  "auth",
+  () => {
+    const user = ref<User | null>(null);
+    const token = ref<string | null>(null);
 
-  function setUser(newUser: User | null) {
-    user.value = newUser;
-  }
-
-  function setToken(newToken: string | null) {
-    token.value = newToken;
-  }
-
-  async function login({ email, password }: { email: string; password: string }) {
-    try {
-      const response = await api.auth.login({ email, password });
-      const data = response as AuthResponse;
-
-      setUser(data.user);
-      setToken(data.access_token);
-
-      return data;
-    } catch (error) {
-      console.error("Login failed:", error);
-      throw error;
+    function setUser(newUser: User | null) {
+      user.value = newUser;
     }
-  }
 
-  function logout() {
-    setUser(null);
-    setToken(null);
-  }
+    function setToken(newToken: string | null) {
+      token.value = newToken;
+    }
 
-  return { user, token, setUser, setToken, login, logout };
-});
+    async function login({ email, password }: { email: string; password: string }) {
+      try {
+        const response = await api.auth.login({ email, password });
+        const data = response as AuthResponse;
+
+        setUser(data.user);
+        setToken(data.access_token);
+
+        return data;
+      } catch (error) {
+        console.error("Login failed:", error);
+        throw error;
+      }
+    }
+
+    function logout() {
+      setUser(null);
+      setToken(null);
+    }
+
+    return { user, token, setUser, setToken, login, logout };
+  },
+  {
+    persist: {
+      enabled: true,
+    },
+  },
+);

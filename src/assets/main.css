@@ -1,28 +1,51 @@
+@import "primeicons/primeicons.css";
 
 /* Primary and Surface Palettes */
 :root {
-  --p-primary-50: #ecfdf5;
-  --p-primary-100: #d1fae5;
-  --p-primary-200: #a7f3d0;
-  --p-primary-300: #6ee7b7;
-  --p-primary-400: #34d399;
-  --p-primary-500: #10b981;
-  --p-primary-600: #059669;
-  --p-primary-700: #047857;
-  --p-primary-800: #065f46;
-  --p-primary-900: #064e3b;
-  --p-primary-950: #022c22;
+  --p-primary-25: #f8f5ff;
+  --p-primary-50: #f9f5ff;
+  --p-primary-100: #f4ebff;
+  --p-primary-200: #ede7fd;
+  --p-primary-300: #dccffc;
+  --p-primary-400: #bca3f5;
+  --p-primary-500: #9c79ec;
+  --p-primary-600: #7f52e0;
+  --p-primary-700: #5f2dd2;
+  --p-primary-800: #4c24a8;
+  --p-primary-900: #391b7e;
+  --p-primary-950: #261254;
   --p-surface-0: #ffffff;
-  --p-surface-50: #fafafa;
-  --p-surface-100: #f4f4f5;
-  --p-surface-200: #e4e4e7;
-  --p-surface-300: #d4d4d8;
-  --p-surface-400: #a1a1aa;
-  --p-surface-500: #71717a;
-  --p-surface-600: #52525b;
-  --p-surface-700: #3f3f46;
-  --p-surface-800: #27272a;
-  --p-surface-900: #18181b;
-  --p-surface-950: #09090b;
+  --p-surface-25: #fcfcfd;
+  --p-surface-50: #f9fafb;
+  --p-surface-100: #f2f4f7;
+  --p-surface-200: #e4e7ec;
+  --p-surface-300: #d0d5dd;
+  --p-surface-400: #98a2b3;
+  --p-surface-500: #667085;
+  --p-surface-600: #475467;
+  --p-surface-700: #344054;
+  --p-surface-800: #182230;
+  --p-surface-900: #101828;
+  --p-surface-950: #0c111d;
   --p-content-border-radius: 6px;
+  --p-primary-contrast-color: #ffffff;
+}
+
+/* Light */
+:root {
+  --p-primary-color: var(--p-primary-700);
+  /* --p-primary-contrast-color: var(--p-surface-0); */
+  --p-primary-hover-color: var(--p-primary-800);
+  --p-primary-active-color: var(--p-primary-700);
+  --p-content-border-color: var(--p-surface-200);
+  --p-content-hover-background: var(--p-surface-100);
+  --p-content-hover-color: var(--p-surface-800);
+  --p-highlight-background: var(--p-primary-50);
+  --p-highlight-color: var(--p-primary-700);
+  --p-highlight-focus-background: var(--p-primary-100);
+  --p-highlight-focus-color: var(--p-primary-800);
+  --p-text-color: var(--p-surface-700);
+  --p-text-hover-color: var(--p-surface-800);
+  --p-text-muted-color: var(--p-surface-500);
+  --p-text-hover-muted-color: var(--p-surface-600);
 }

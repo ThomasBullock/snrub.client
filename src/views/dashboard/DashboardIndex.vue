@@ -31,7 +31,7 @@
               >
                 <i class="pi pi-home text-2xl" />
               </a>
-              <div class="mt-2 text-primary-contrast/70 font-medium text-sm">Home</div>
+              <div class="mt-2 text-primary-contrast font-medium text-sm">Home</div>
             </li>
             <li class="w-6/12 text-center">
               <a
@@ -39,7 +39,7 @@
               >
                 <i class="pi pi-star-fill text-2xl" />
               </a>
-              <div class="mt-2 text-primary-contrast/70 font-medium text-sm">Favorites</div>
+              <div class="mt-2 text-primary-contrast font-medium text-sm">Favorites</div>
             </li>
             <li class="w-6/12 text-center mt-4">
               <a
@@ -47,7 +47,7 @@
               >
                 <i class="pi pi-users text-2xl" />
               </a>
-              <div class="mt-2 text-primary-contrast/70 font-medium text-sm">Users</div>
+              <div class="mt-2 text-primary-contrast font-medium text-sm">Users</div>
             </li>
             <li class="w-6/12 text-center mt-4">
               <a
@@ -55,7 +55,7 @@
               >
                 <i class="pi pi-comments text-2xl" />
               </a>
-              <div class="mt-2 text-primary-contrast/70 font-medium text-sm">Chart</div>
+              <div class="mt-2 text-primary-contrast font-medium text-sm">Chart</div>
             </li>
             <li class="w-6/12 text-center mt-4">
               <a
@@ -63,7 +63,7 @@
               >
                 <i class="pi pi-calendar text-2xl" />
               </a>
-              <div class="mt-2 text-primary-contrast/70 font-medium text-sm">Calendar</div>
+              <div class="mt-2 text-primary-contrast font-medium text-sm">Calendar</div>
             </li>
             <li class="w-6/12 text-center mt-4">
               <a
@@ -71,7 +71,7 @@
               >
                 <i class="pi pi-cog text-2xl" />
               </a>
-              <div class="mt-2 text-primary-contrast/70 font-medium text-sm">Settings</div>
+              <div class="mt-2 text-primary-contrast font-medium text-sm">Settings</div>
             </li>
           </ul>
         </div>
@@ -170,11 +170,7 @@
           </li>
         </ul>
       </div>
-      <div class="p-8 flex flex-col flex-auto">
-        <div
-          class="border-2 border-dashed border-surface rounded-border bg-surface-0 dark:bg-surface-950 flex-auto"
-        />
-      </div>
+      <router-view />
     </div>
   </div>
 </template>
@@ -183,4 +179,16 @@ import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputText from "primevue/inputtext";
 import OverlayBadge from "primevue/overlaybadge";
+import { useUsersStore } from "@/stores/users";
+import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const usersStore = useUsersStore();
+
+onMounted(() => {
+  usersStore.fetchUsers().then(() => {
+    router.push({ name: "users" });
+  });
+});
 </script>
