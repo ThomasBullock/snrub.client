@@ -1,3 +1,4 @@
+import { HttpError } from "@/types/errors";
 const api: { [key: string]: any } = {};
 const baseUrl = import.meta.env.VITE_API_URL; // Example usage of process;
 const headers = { "Content-Type": "application/json" };
@@ -23,15 +24,32 @@ function getHeaders() {
   //   : headers;
 }
 
+async function handleResponse(response: Response) {
+  if (!response.ok) {
+    // probably need a try catch here
+    const errorData = await response.json();
+    // Debug what we're getting from the server
+    console.log("Error data from server:", errorData);
+
+    // Make sure we're using the detail field correctly
+    const errorMessage = Array.isArray(errorData.detail)
+      ? errorData.detail[0].msg
+      : errorData.detail || "Something went wrong";
+
+    throw new HttpError(errorMessage, response.status, response.statusText, errorData);
+  }
+  return response.json();
+}
+
 function generateApi(endpoint: string) {
   return {
     get: () =>
       fetch(`${baseUrl}/${endpoint}`, { method: "GET", headers: getHeaders() }).then((res) =>
-        res.json(),
+        handleResponse(res),
       ),
     getOne: (uid: string) =>
       fetch(`${baseUrl}/${endpoint}/${uid}`, { method: "GET", headers: getHeaders() }).then((res) =>
-        res.json(),
+        handleResponse(res),
       ),
     create: <T>(
       data: T, // function to use a generic type parameter T
@@ -40,17 +58,17 @@ function generateApi(endpoint: string) {
         method: "POST",
         body: JSON.stringify(data),
         headers: getHeaders(),
-      }).then((res) => res.json()),
+      }).then((res) => handleResponse(res)),
     // check whether we need JSON.stringify
     updateOne: <T>(uid: string, data: T) =>
       fetch(`${baseUrl}/${endpoint}/${uid}`, {
         method: "PUT",
         body: JSON.stringify(data),
         headers: getHeaders(),
-      }).then((res) => res.json()),
+      }).then((res) => handleResponse(res)),
     deleteOne: (uid: string) =>
       fetch(`${baseUrl}/${endpoint}/${uid}`, { method: "DELETE", headers: getHeaders() }).then(
-        (res) => res.json(),
+        (res) => handleResponse(res),
       ),
   };
 }
@@ -65,25 +83,25 @@ api["auth"] = {
       method: "POST",
       body: JSON.stringify(data),
       headers,
-    }).then((res) => res.json()),
+    }).then((res) => handleResponse(res)),
   requestPasswordReset: <T>(data: T) =>
     fetch(`${baseUrl}/auth/request-password-reset`, {
       method: "POST",
       body: JSON.stringify(data),
       headers,
-    }).then((res) => res.json()),
+    }).then((res) => handleResponse(res)),
   signup: <T>(data: T) =>
     fetch(`${baseUrl}/auth/signup`, {
       method: "POST",
       body: JSON.stringify(data),
       headers,
-    }).then((res) => res.json()),
+    }).then((res) => handleResponse(res)),
   resetPassword: <T>(data: T) =>
     fetch(`${baseUrl}/auth/reset-password`, {
       method: "POST",
       body: JSON.stringify(data),
       headers,
-    }).then((res) => res.json()),
+    }).then((res) => handleResponse(res)),
 };
 
 export default api;

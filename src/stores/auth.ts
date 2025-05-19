@@ -39,7 +39,6 @@ export const useAuthStore = defineStore(
 
         return data;
       } catch (error) {
-        console.error("Login failed:", error);
         throw error;
       }
     }
@@ -61,7 +60,6 @@ export const useAuthStore = defineStore(
         const response = await api.auth.resetPassword({ token, new_password });
         return response;
       } catch (error) {
-        console.error("Password reset failed:", error);
         throw error;
       }
     }

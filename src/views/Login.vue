@@ -78,6 +78,9 @@
           class="w-full p-4"
         />
       </div>
+      <Message v-if="errorMessage" class="mt-4" severity="error" size="small">{{
+        errorMessage
+      }}</Message>
     </div>
     <div
       class="hidden md:block w-6/12 bg-no-repeat bg-cover bg-[url('https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/signin/signin.jpg')]"
@@ -85,9 +88,11 @@
   </div>
 </template>
 <script setup lang="ts">
+import { HttpError } from "@/types/errors";
 import Button from "primevue/button";
 import Checkbox from "primevue/checkbox";
 import InputText from "primevue/inputtext";
+import Message from "primevue/message";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 
@@ -98,9 +103,10 @@ const authStore = useAuthStore();
 
 const email = ref("");
 const password = ref("");
+const errorMessage = ref("");
 
 function login() {
-  console.log("login");
+  errorMessage.value = ""; // Clear previous errors
 
   authStore
     .login({
@@ -111,6 +117,14 @@ function login() {
       // should use a more specific type for the API response instead of any
       console.log(res.data);
       router.push({ name: "dashboardIndex" });
+    })
+    .catch((error) => {
+      if (error instanceof HttpError) {
+        // Display the error message from the server
+        errorMessage.value = error.message;
+      } else {
+        errorMessage.value = "Login failed";
+      }
     });
 }
 
