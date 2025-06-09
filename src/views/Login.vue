@@ -32,51 +32,70 @@
         </div>
       </div>
       <div>
-        <label for="email2" class="block text-surface-900 dark:text-surface-0 font-medium mb-2"
-          >Email</label
-        >
-        <InputText
-          id="email2"
-          v-model="email"
-          type="text"
-          placeholder="Email address"
-          class="w-full mb-4 p-4"
-        />
-
-        <label for="password2" class="block text-surface-900 dark:text-surface-0 font-medium mb-2"
-          >Password</label
-        >
-        <InputText
-          id="password2"
-          v-model="password"
-          type="password"
-          placeholder="Password"
-          class="w-full mb-4 p-4"
-        />
-
-        <div class="flex items-center justify-between mb-12">
-          <div class="flex items-center">
-            <!-- <Checkbox id="rememberme2" v-model="checked2" :binary="true" class="mr-2" />
-            <label for="rememberme2">Remember me</label> -->
-          </div>
-          <Button
-            class="font-medium no-underline ml-2 text-primary text-right"
-            label="Forgot password?"
-            severity="secondary"
-            variant="text"
-            as="router-link"
-            to="/forgot"
+        <form>
+          <label for="email2" class="block text-surface-900 dark:text-surface-0 font-medium mb-2"
+            >Email</label
           >
-          </Button>
-        </div>
+          <InputText
+            id="email2"
+            v-model="email"
+            type="text"
+            placeholder="Email address"
+            class="w-full mb-4 p-4"
+          />
+
+          <label for="password2" class="block text-surface-900 dark:text-surface-0 font-medium mb-2"
+            >Password</label
+          >
+          <InputText
+            id="password2"
+            v-model="password"
+            type="password"
+            placeholder="Password"
+            class="w-full mb-4 p-4"
+            autocomplete="off"
+          />
+
+          <div class="flex items-center justify-between mb-12">
+            <div class="flex items-center">
+              <!-- <Checkbox id="rememberme2" v-model="checked2" :binary="true" class="mr-2" />
+              <label for="rememberme2">Remember me</label> -->
+            </div>
+            <Button
+              class="font-medium no-underline ml-2 text-primary text-right"
+              label="Forgot password?"
+              severity="secondary"
+              variant="text"
+              as="router-link"
+              to="/forgot"
+            >
+            </Button>
+          </div>
+        </form>
 
         <Button
-          @click="login"
+          @click="handleLogin"
           label="Sign in"
-          severity="secondary"
+          severity="primary"
           icon="pi pi-user"
           class="w-full p-4"
         />
+        <div class="flex justify-between gap-2 mt-4">
+          <Button
+            @click="handleGoogleLogin"
+            label="Sign in with Google"
+            severity="danger"
+            icon="pi pi-google"
+            class="w-100 grow p-4 mt-2"
+          />
+          <Button
+            @click="handleSpotifyLogin"
+            label="Sign in with Spotify"
+            severity="success"
+            icon="pi pi-google"
+            class="w-100 grow p-4 mt-2"
+          />
+        </div>
       </div>
       <Message v-if="errorMessage" class="mt-4" severity="error" size="small">{{
         errorMessage
@@ -90,7 +109,7 @@
 <script setup lang="ts">
 import { HttpError } from "@/types/errors";
 import Button from "primevue/button";
-import Checkbox from "primevue/checkbox";
+
 import InputText from "primevue/inputtext";
 import Message from "primevue/message";
 import { useAuthStore } from "@/stores/auth";
@@ -105,7 +124,7 @@ const email = ref("");
 const password = ref("");
 const errorMessage = ref("");
 
-function login() {
+function handleLogin() {
   errorMessage.value = ""; // Clear previous errors
 
   authStore
@@ -126,6 +145,15 @@ function login() {
         errorMessage.value = "Login failed";
       }
     });
+}
+
+function handleGoogleLogin() {
+  console.log("google login");
+  authStore.loginGoogle();
+}
+
+function handleSpotifyLogin() {
+  console.log("spotify login");
 }
 
 const checked2 = ref(true);

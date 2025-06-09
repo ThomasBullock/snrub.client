@@ -100,6 +100,12 @@ api["auth"] = {
       body: JSON.stringify(data),
       headers,
     }).then((res) => handleResponse(res)),
+  loginGoogle: <T>(data: T) =>
+    fetch(`${baseUrl}/auth/google/login`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers,
+    }).then((res) => handleResponse(res)),
   requestPasswordReset: <T>(data: T) =>
     fetch(`${baseUrl}/auth/request-password-reset`, {
       method: "POST",

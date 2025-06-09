@@ -43,6 +43,20 @@ export const useAuthStore = defineStore(
       }
     }
 
+    async function loginGoogle() {
+      try {
+        const response = await api.auth.loginGoogle();
+        const data = response as AuthResponse;
+
+        setUser(data.user);
+        setToken(data.access_token);
+
+        return data;
+      } catch (error) {
+        throw error;
+      }
+    }
+
     async function reset({ email }: { email: string }) {
       try {
         const response = await api.auth.requestPasswordReset({ email });
@@ -69,7 +83,7 @@ export const useAuthStore = defineStore(
       setToken(null);
     }
 
-    return { user, token, setUser, setToken, login, logout, reset, resetPassword };
+    return { user, token, setUser, setToken, login, loginGoogle, logout, reset, resetPassword };
   },
   {
     persist: {
