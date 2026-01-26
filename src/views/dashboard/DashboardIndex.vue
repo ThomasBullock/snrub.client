@@ -1,189 +1,251 @@
 <template>
   <div class="min-h-screen flex relative lg:static bg-surface-50 dark:bg-surface-950">
+    <!-- Desktop Sidebar -->
     <div
-      id="app-sidebar-6"
-      class="h-screen hidden lg:block flex-shrink-0 absolute lg:static left-0 top-0 z-10 select-none w-48 bg-primary animate-duration-300 animate-ease-in-out"
+      id="app-sidebar"
+      class="bg-surface-900 h-screen hidden lg:block shrink-0 absolute lg:static left-0 top-0 z-10 lg:w-28 w-72 select-none"
     >
       <div class="flex flex-col h-full">
-        <div class="flex items-center justify-center flex-shrink-0 h-[60px]">
-          <svg height="36" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div
+          class="flex items-center justify-center shrink-0 bg-primary p-4 border-r border-primary min-h-[4.71rem]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="33"
+            height="32"
+            viewBox="0 0 33 32"
+            fill="none"
+          >
             <path
-              d="M42.6792 7.32384C39.183 3.82714 34.7285 1.44571 29.8788 0.480712C25.0292 -0.484288 20.0023 0.0105324 15.4339 1.90259C10.8655 3.79464 6.9608 6.99901 4.21357 11.1103C1.46634 15.2216 0 20.0553 0 25C0 29.9447 1.46634 34.7784 4.21357 38.8897C6.9608 43.001 10.8655 46.2054 15.4339 48.0974C20.0023 49.9895 25.0292 50.4843 29.8788 49.5193C34.7285 48.5543 39.183 46.1729 42.6792 42.6762C47.3667 37.9879 50 31.6296 50 25C50 18.3704 47.3667 12.0121 42.6792 7.32384ZM6.52009 16.5397C7.77982 13.7456 9.64643 11.2673 11.9843 9.28518C14.3221 7.30303 17.0722 5.86678 20.0347 5.08098C22.9973 4.29517 26.0978 4.17955 29.1106 4.7425C32.1235 5.30544 34.9729 6.53277 37.452 8.33527C31.3155 7.75571 23.6337 10.8921 17.4065 17.1079C15.0562 19.4544 13.0651 22.1348 11.4974 25.0625C9.36518 22.5257 7.68188 19.6433 6.52009 16.5397ZM20.3042 45.5397C15.5592 44.2684 11.4229 41.347 8.6383 37.3001C5.85366 33.2533 4.60304 28.3462 5.11107 23.4602C7.69054 29.0625 14.202 34.1534 22.7474 36.4262C25.9376 37.2915 29.2393 37.6745 32.5429 37.5625C31.4201 40.6682 29.7795 43.5614 27.6905 46.1193C25.2123 46.37 22.7091 46.1659 20.3042 45.517V45.5397ZM35.8611 21.7784C35.0187 18.5738 33.7092 15.5107 31.9746 12.6875C35.2238 12.1091 38.5474 12.0861 41.8042 12.6193C43.262 14.6374 44.3366 16.9062 44.9746 19.3125C46.2481 24.0582 45.7875 29.1025 43.6754 33.539C41.5634 37.9755 37.9385 41.5134 33.452 43.5171C36.9974 38.5057 38.1337 30.2897 35.8611 21.7784Z"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M7.34219 2.87829C6.19766 3.67858 5.1627 4.62478 4.26426 5.68992C7.9357 5.34906 12.6001 5.90564 18.0155 8.61335C23.7984 11.5047 28.455 11.6025 31.6958 10.9773C31.4017 10.087 31.0315 9.23135 30.593 8.41791C26.8832 8.80919 22.1272 8.29127 16.5845 5.51998C13.0648 3.76014 9.96221 3.03521 7.34219 2.87829ZM28.4259 5.33332C25.4962 2.06 21.2387 0 16.5 0C15.1084 0 13.7581 0.177686 12.4709 0.511584C14.2143 0.987269 16.0663 1.68319 18.0155 2.65781C22.0736 4.68682 25.5771 5.34013 28.4259 5.33332ZM32.3887 14.1025C28.4735 14.8756 23.067 14.7168 16.5845 11.4755C10.524 8.44527 5.70035 8.48343 2.44712 9.20639C2.2792 9.24367 2.11523 9.28287 1.95522 9.32367C1.5293 10.25 1.18931 11.2241 0.945362 12.2356C1.20591 12.166 1.47514 12.0998 1.75293 12.0381C5.69966 11.161 11.2761 11.1991 18.0155 14.5689C24.0761 17.5991 28.8997 17.561 32.1529 16.838C32.2644 16.8133 32.3742 16.7877 32.4822 16.7613C32.4941 16.509 32.5 16.2552 32.5 16C32.5 15.358 32.4622 14.7248 32.3887 14.1025ZM31.9598 20.1378C28.0826 20.8157 22.8336 20.5555 16.5845 17.431C10.524 14.4008 5.70035 14.439 2.44712 15.1619C1.725 15.3223 1.07539 15.5178 0.502344 15.7241C0.500782 15.8158 0.5 15.9078 0.5 16C0.5 24.8366 7.66344 32 16.5 32C23.9057 32 30.1362 26.9687 31.9598 20.1378Z"
               class="fill-primary-contrast"
             />
           </svg>
         </div>
-        <div class="my-4 p-4">
-          <IconField icon-position="left">
-            <InputIcon class="pi pi-search !text-primary-contrast/80" />
-            <InputText
-              type="text"
-              class="!border-0 !bg-primary-200/30 !text-primary-contrast placeholder:!text-primary-contrast/80 w-full"
-              placeholder="Search"
-            />
-          </IconField>
-        </div>
-        <div class="overflow-y-auto">
-          <ul class="list-none p-4 m-0 flex flex-wrap">
-            <li class="w-6/12 text-center">
-              <a
-                class="w-[60px] h-[60px] rounded-xl cursor-pointer inline-flex items-center justify-center border-2 border-primary-200/30 hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150"
-              >
-                <i class="pi pi-home text-2xl" />
-              </a>
-              <div class="mt-2 text-primary-contrast font-medium text-sm">Home</div>
-            </li>
-            <li class="w-6/12 text-center">
-              <a
-                class="w-[60px] h-[60px] rounded-xl cursor-pointer inline-flex items-center justify-center border-2 border-primary-200/30 hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150"
-              >
-                <i class="pi pi-star-fill text-2xl" />
-              </a>
-              <div class="mt-2 text-primary-contrast font-medium text-sm">Favorites</div>
-            </li>
-            <li class="w-6/12 text-center mt-4">
-              <a
-                class="w-[60px] h-[60px] rounded-xl cursor-pointer inline-flex items-center justify-center border-2 border-primary-200/30 hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150"
-              >
-                <i class="pi pi-users text-2xl" />
-              </a>
-              <div class="mt-2 text-primary-contrast font-medium text-sm">Users</div>
-            </li>
-            <li class="w-6/12 text-center mt-4">
-              <a
-                class="w-[60px] h-[60px] rounded-xl cursor-pointer inline-flex items-center justify-center border-2 border-primary-200/30 hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150"
-              >
-                <i class="pi pi-comments text-2xl" />
-              </a>
-              <div class="mt-2 text-primary-contrast font-medium text-sm">Chart</div>
-            </li>
-            <li class="w-6/12 text-center mt-4">
-              <a
-                class="w-[60px] h-[60px] rounded-xl cursor-pointer inline-flex items-center justify-center border-2 border-primary-200/30 hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150"
-              >
-                <i class="pi pi-calendar text-2xl" />
-              </a>
-              <div class="mt-2 text-primary-contrast font-medium text-sm">Calendar</div>
-            </li>
-            <li class="w-6/12 text-center mt-4">
-              <a
-                class="w-[60px] h-[60px] rounded-xl cursor-pointer inline-flex items-center justify-center border-2 border-primary-200/30 hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150"
-              >
-                <i class="pi pi-cog text-2xl" />
-              </a>
-              <div class="mt-2 text-primary-contrast font-medium text-sm">Settings</div>
-            </li>
-          </ul>
-        </div>
-        <div class="mt-auto border-t border-primary-200/30 p-4 flex justify-between">
-          <!-- <a
-            class="w-10 h-10 rounded-xl cursor-pointer inline-flex items-center justify-center border-2 border-primary-200/30 hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150"
+        <div class="flex-1 p-4 flex flex-col items-center gap-2 border-r border-surface-800">
+          <RouterLink
+            :to="{ name: 'dashboardIndex' }"
+            class="w-full flex flex-row lg:flex-col items-center cursor-pointer p-2 lg:justify-center rounded-lg text-surface-400 border border-transparent hover:bg-surface-800 hover:border-surface-700 hover:text-surface-0 transition-colors duration-150 group lg:gap-2"
           >
-            <img
-              src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/circle/avatar-f-6.png"
-              class="w-6 h-6"
+            <i
+              class="pi pi-home text-xl! leading-tight! text-surface-400 group-hover:text-surface-0"
             />
-          </a> -->
+            <span class="ml-2 lg:ml-0 font-medium text-base lg:text-sm leading-tight lg:block"
+              >Home</span
+            >
+          </RouterLink>
+          <RouterLink
+            :to="{ name: 'users' }"
+            class="w-full flex flex-row lg:flex-col items-center cursor-pointer p-2 lg:justify-center rounded-lg text-surface-400 border border-transparent hover:bg-surface-800 hover:border-surface-700 hover:text-surface-0 transition-colors duration-150 group lg:gap-2"
+          >
+            <i
+              class="pi pi-users text-xl! leading-tight! text-surface-400 group-hover:text-surface-0"
+            />
+            <span class="ml-2 lg:ml-0 font-medium text-base lg:text-sm leading-tight lg:block"
+              >Team</span
+            >
+          </RouterLink>
           <a
-            @click="handleLogout"
-            class="w-10 h-10 rounded-xl cursor-pointer inline-flex items-center justify-center border-2 border-primary-200/30 hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150"
+            class="w-full flex flex-row lg:flex-col items-center cursor-pointer p-2 lg:justify-center rounded-lg text-surface-400 border border-transparent hover:bg-surface-800 hover:border-surface-700 hover:text-surface-0 transition-colors duration-150 group lg:gap-2"
           >
-            <i class="pi pi-sign-out text-xl" />
+            <i
+              class="pi pi-palette text-xl! leading-tight! text-surface-400 group-hover:text-surface-0"
+            />
+            <span class="ml-2 lg:ml-0 font-medium text-base lg:text-sm leading-tight lg:block"
+              >Design</span
+            >
           </a>
           <a
-            class="w-10 h-10 rounded-xl cursor-pointer inline-flex items-center justify-center border-2 border-primary-200/30 hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150"
+            class="w-full flex flex-row lg:flex-col items-center cursor-pointer p-2 lg:justify-center rounded-lg text-surface-400 border border-transparent hover:bg-surface-800 hover:border-surface-700 hover:text-surface-0 transition-colors duration-150 group lg:gap-2"
           >
-            <i class="pi pi-github text-xl" />
+            <i
+              class="pi pi-chart-line text-xl! leading-tight! text-surface-400 group-hover:text-surface-0"
+            />
+            <span class="ml-2 lg:ml-0 font-medium text-base lg:text-sm leading-tight lg:block"
+              >Reports</span
+            >
+          </a>
+          <a
+            class="w-full flex flex-row lg:flex-col items-center cursor-pointer p-2 lg:justify-center rounded-lg text-surface-400 border border-transparent hover:bg-surface-800 hover:border-surface-700 hover:text-surface-0 transition-colors duration-150 group lg:gap-2"
+          >
+            <i
+              class="pi pi-calendar text-xl! leading-tight! text-surface-400 group-hover:text-surface-0"
+            />
+            <span class="ml-2 lg:ml-0 font-medium text-base lg:text-sm leading-tight lg:block"
+              >Events</span
+            >
+          </a>
+          <a
+            class="w-full flex flex-row lg:flex-col items-center cursor-pointer p-2 lg:justify-center rounded-lg text-surface-400 border border-transparent hover:bg-surface-800 hover:border-surface-700 hover:text-surface-0 transition-colors duration-150 group lg:gap-2"
+          >
+            <i
+              class="pi pi-cog text-xl! leading-tight! text-surface-400 group-hover:text-surface-0"
+            />
+            <span class="ml-2 lg:ml-0 font-medium text-base lg:text-sm leading-tight lg:block"
+              >Options</span
+            >
+          </a>
+        </div>
+        <div class="mt-auto flex flex-col items-center pt-4 pb-6 px-4 gap-4">
+          <hr class="w-full border-t border-surface-800" />
+          <a
+            @click="handleLogout"
+            class="cursor-pointer inline-flex items-center justify-center text-surface-400 hover:text-surface-0 transition-colors duration-150"
+            title="Logout"
+          >
+            <i class="pi pi-sign-out text-xl" />
           </a>
         </div>
       </div>
     </div>
+
+    <!-- Mobile Drawer -->
+    <Drawer
+      v-model:visible="drawerVisible"
+      position="left"
+      class="lg:hidden"
+      pt:root:class="border-r! border-surface-800!"
+      @hide="onDrawerHide"
+    >
+      <template #container="{ closeCallback }">
+        <div class="flex flex-col h-full bg-surface-900">
+          <div class="flex items-center justify-center shrink-0 bg-primary p-4 min-h-[4.71rem]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="33"
+              height="32"
+              viewBox="0 0 33 32"
+              fill="none"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M7.34219 2.87829C6.19766 3.67858 5.1627 4.62478 4.26426 5.68992C7.9357 5.34906 12.6001 5.90564 18.0155 8.61335C23.7984 11.5047 28.455 11.6025 31.6958 10.9773C31.4017 10.087 31.0315 9.23135 30.593 8.41791C26.8832 8.80919 22.1272 8.29127 16.5845 5.51998C13.0648 3.76014 9.96221 3.03521 7.34219 2.87829ZM28.4259 5.33332C25.4962 2.06 21.2387 0 16.5 0C15.1084 0 13.7581 0.177686 12.4709 0.511584C14.2143 0.987269 16.0663 1.68319 18.0155 2.65781C22.0736 4.68682 25.5771 5.34013 28.4259 5.33332ZM32.3887 14.1025C28.4735 14.8756 23.067 14.7168 16.5845 11.4755C10.524 8.44527 5.70035 8.48343 2.44712 9.20639C2.2792 9.24367 2.11523 9.28287 1.95522 9.32367C1.5293 10.25 1.18931 11.2241 0.945362 12.2356C1.20591 12.166 1.47514 12.0998 1.75293 12.0381C5.69966 11.161 11.2761 11.1991 18.0155 14.5689C24.0761 17.5991 28.8997 17.561 32.1529 16.838C32.2644 16.8133 32.3742 16.7877 32.4822 16.7613C32.4941 16.509 32.5 16.2552 32.5 16C32.5 15.358 32.4622 14.7248 32.3887 14.1025ZM31.9598 20.1378C28.0826 20.8157 22.8336 20.5555 16.5845 17.431C10.524 14.4008 5.70035 14.439 2.44712 15.1619C1.725 15.3223 1.07539 15.5178 0.502344 15.7241C0.500782 15.8158 0.5 15.9078 0.5 16C0.5 24.8366 7.66344 32 16.5 32C23.9057 32 30.1362 26.9687 31.9598 20.1378Z"
+                class="fill-primary-contrast"
+              />
+            </svg>
+          </div>
+          <div class="flex-1 p-4 flex flex-col gap-2">
+            <RouterLink
+              :to="{ name: 'dashboardIndex' }"
+              @click="closeCallback"
+              class="w-full flex flex-row items-center cursor-pointer p-2 rounded-lg text-surface-400 border border-transparent hover:bg-surface-800 hover:border-surface-700 hover:text-surface-0 transition-colors duration-150 group"
+            >
+              <i
+                class="pi pi-home text-xl! leading-tight! text-surface-400 group-hover:text-surface-0"
+              />
+              <span class="ml-2 font-medium text-base leading-tight">Home</span>
+            </RouterLink>
+            <RouterLink
+              :to="{ name: 'users' }"
+              @click="closeCallback"
+              class="w-full flex flex-row items-center cursor-pointer p-2 rounded-lg text-surface-400 border border-transparent hover:bg-surface-800 hover:border-surface-700 hover:text-surface-0 transition-colors duration-150 group"
+            >
+              <i
+                class="pi pi-users text-xl! leading-tight! text-surface-400 group-hover:text-surface-0"
+              />
+              <span class="ml-2 font-medium text-base leading-tight">Team</span>
+            </RouterLink>
+            <a
+              @click="closeCallback"
+              class="w-full flex flex-row items-center cursor-pointer p-2 rounded-lg text-surface-400 border border-transparent hover:bg-surface-800 hover:border-surface-700 hover:text-surface-0 transition-colors duration-150 group"
+            >
+              <i
+                class="pi pi-palette text-xl! leading-tight! text-surface-400 group-hover:text-surface-0"
+              />
+              <span class="ml-2 font-medium text-base leading-tight">Design System</span>
+            </a>
+            <a
+              @click="closeCallback"
+              class="w-full flex flex-row items-center cursor-pointer p-2 rounded-lg text-surface-400 border border-transparent hover:bg-surface-800 hover:border-surface-700 hover:text-surface-0 transition-colors duration-150 group"
+            >
+              <i
+                class="pi pi-chart-line text-xl! leading-tight! text-surface-400 group-hover:text-surface-0"
+              />
+              <span class="ml-2 font-medium text-base leading-tight">Reports</span>
+            </a>
+            <a
+              @click="closeCallback"
+              class="w-full flex flex-row items-center cursor-pointer p-2 rounded-lg text-surface-400 border border-transparent hover:bg-surface-800 hover:border-surface-700 hover:text-surface-0 transition-colors duration-150 group"
+            >
+              <i
+                class="pi pi-calendar text-xl! leading-tight! text-surface-400 group-hover:text-surface-0"
+              />
+              <span class="ml-2 font-medium text-base leading-tight">Events</span>
+            </a>
+            <a
+              @click="closeCallback"
+              class="w-full flex flex-row items-center cursor-pointer p-2 rounded-lg text-surface-400 border border-transparent hover:bg-surface-800 hover:border-surface-700 hover:text-surface-0 transition-colors duration-150 group"
+            >
+              <i
+                class="pi pi-cog text-xl! leading-tight! text-surface-400 group-hover:text-surface-0"
+              />
+              <span class="ml-2 font-medium text-base leading-tight">Options</span>
+            </a>
+          </div>
+          <div class="mt-auto flex flex-col pt-4 pb-6 px-4 gap-4">
+            <hr class="w-full border-t border-surface-800" />
+            <a
+              @click="handleLogout"
+              class="cursor-pointer inline-flex items-center gap-2 text-surface-400 hover:text-surface-0 transition-colors duration-150"
+            >
+              <i class="pi pi-sign-out text-xl" />
+              <span class="font-medium text-base">Logout</span>
+            </a>
+          </div>
+        </div>
+      </template>
+    </Drawer>
     <div class="min-h-screen flex flex-col relative flex-auto">
       <div
-        class="h-[60px] flex justify-between items-center px-8 bg-surface-0 dark:bg-surface-950 shadow relative lg:static border-b border-surface"
+        class="flex justify-between items-center py-4 px-8 bg-surface-0 dark:bg-surface-900 relative lg:static border-b border-surface-200 dark:border-surface-700"
       >
-        <div class="flex">
+        <div class="flex items-center w-full gap-4">
           <a
-            v-styleclass="{
-              selector: '#app-sidebar-6',
-              enterFromClass: 'hidden',
-              enterActiveClass: 'animate-fadeinleft',
-              leaveToClass: 'hidden',
-              leaveActiveClass: 'animate-fadeoutleft',
-              hideOnOutsideClick: true,
-            }"
-            class="cursor-pointer block lg:hidden text-surface-700 dark:text-surface-100 mr-4 mt-1"
+            @click="drawerVisible = true"
+            class="cursor-pointer flex items-center justify-center lg:hidden text-surface-700 dark:text-surface-100"
           >
-            <i class="pi pi-bars text-4xl" />
+            <i class="pi pi-bars text-xl!" />
           </a>
+          <IconField icon-position="left" class="w-full sm:w-80">
+            <InputIcon
+              class="pi pi-search text-base! leading-tight! text-surface-400 dark:text-surface-500"
+            />
+            <InputText
+              type="text"
+              placeholder="Search"
+              class="w-full border-transparent! bg-transparent! shadow-none!"
+            />
+          </IconField>
         </div>
-        <a
-          v-styleclass="{
-            selector: '@next',
-            enterFromClass: 'hidden',
-            enterActiveClass: 'animate-fadein',
-            leaveToClass: 'hidden',
-            leaveActiveClass: 'animate-fadeout',
-            hideOnOutsideClick: true,
-          }"
-          class="cursor-pointer block lg:hidden text-surface-700 dark:text-surface-100"
-        >
-          <i class="pi pi-ellipsis-v text-2xl" />
-        </a>
-        <ul
-          class="list-none p-0 m-0 hidden lg:flex lg:items-center select-none lg:flex-row bg-surface-0 dark:bg-surface-950 border lg:border-0 border-surface right-0 top-full z-10 shadow lg:shadow-none absolute lg:static"
-        >
-          <li>
-            <a
-              class="flex p-4 lg:px-4 lg:py-2 items-center text-surface-600 dark:text-surface-200 hover:text-surface-900 dark:hover:text-surface-0 hover:bg-surface-100 dark:hover:bg-surface-700 font-medium rounded-border cursor-pointer duration-150 transition-colors"
-            >
-              <i class="pi pi-inbox text-base lg:!text-2xl leading-none mr-2 lg:mr-0" />
-              <span class="block lg:hidden font-medium">Inbox</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="flex p-4 lg:px-4 lg:py-2 items-center text-surface-600 dark:text-surface-200 hover:text-surface-900 dark:hover:text-surface-0 hover:bg-surface-100 dark:hover:bg-surface-700 font-medium rounded-border cursor-pointer duration-150 transition-colors"
-            >
-              <OverlayBadge severity="danger" class="mr-2 lg:mr-0">
-                <i class="pi pi-bell text-base lg:!text-2xl leading-none" />
-              </OverlayBadge>
-              <span class="block lg:hidden font-medium">Notifications</span>
-            </a>
-          </li>
-          <li class="border-t border-surface lg:border-t-0">
-            <a
-              class="flex p-4 lg:px-4 lg:py-2 items-center hover:bg-surface-100 dark:hover:bg-surface-700 font-medium rounded-border cursor-pointer duration-150 transition-colors"
-            >
-              <img
-                src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/circle/avatar-f-6.png"
-                class="mr-4 lg:mr-0 w-8 h-8"
-              />
-              <div class="block lg:hidden">
-                <div class="text-surface-900 dark:text-surface-0 font-medium">
-                  Josephine Lillard
-                </div>
-                <span class="text-surface-600 dark:text-surface-200 font-medium text-sm"
-                  >Marketing Specialist</span
-                >
-              </div>
-            </a>
-          </li>
-        </ul>
+        <div class="flex items-center gap-8">
+          <i
+            class="pi pi-bell text-xl! leading-tight! text-surface-500 dark:text-surface-400 cursor-pointer"
+          />
+          <img
+            src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png"
+            class="w-8 h-8 rounded-full cursor-pointer"
+          />
+        </div>
       </div>
       <div v-if="isLoading" class="flex justify-center items-center h-full">
         <ProgressSpinner />
       </div>
-      <router-view v-else />
+      <div v-else class="p-8 flex flex-col flex-auto bg-surface-0 dark:bg-surface-950">
+        <router-view />
+      </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import Drawer from "primevue/drawer";
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputText from "primevue/inputtext";
 import ProgressSpinner from "primevue/progressspinner";
-import OverlayBadge from "primevue/overlaybadge";
+import { RouterLink } from "vue-router";
 import { useUsersStore } from "@/stores/users";
 import { useAuthStore } from "@/stores/auth";
 import { onBeforeMount, ref } from "vue";
@@ -193,11 +255,16 @@ const router = useRouter();
 const usersStore = useUsersStore();
 const authStore = useAuthStore();
 const isLoading = ref(false);
+const drawerVisible = ref(false);
 
 async function handleLogout() {
   console.log("logout");
   await authStore.logout();
   router.push({ name: "Login" });
+}
+
+function onDrawerHide() {
+  drawerVisible.value = false;
 }
 
 onBeforeMount(() => {
