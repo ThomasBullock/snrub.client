@@ -3,6 +3,7 @@ import "@/assets/main.css";
 
 import { createApp } from "vue";
 import PrimeVue from "primevue/config";
+import ToastService from "primevue/toastservice";
 import { createPinia } from "pinia";
 // @ts-ignore
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
@@ -16,6 +17,7 @@ const app = createApp(App);
 app.use(PrimeVue, {
   theme: "none",
 });
+app.use(ToastService);
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);

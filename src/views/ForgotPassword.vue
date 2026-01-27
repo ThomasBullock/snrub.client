@@ -66,11 +66,13 @@ import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
+import { useToast } from "primevue/usetoast";
 
 import { ref } from "vue";
 
 const router = useRouter();
 const authStore = useAuthStore();
+const toast = useToast();
 
 const email = ref("");
 
@@ -84,6 +86,12 @@ function handleReset() {
     .then((res: any) => {
       // should use a more specific type for the API response instead of any
       console.log(res.data);
+      toast.add({
+        severity: "success",
+        summary: "Email Sent",
+        detail: "If your email is registered, you will receive a password reset link",
+        life: 5000,
+      });
       //   router.push({ name: "dashboardIndex" });
     });
 }

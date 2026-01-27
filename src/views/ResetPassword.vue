@@ -131,6 +131,7 @@ import { useAuthStore } from "@/stores/auth";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import Message from "primevue/message";
+import { useToast } from "primevue/usetoast";
 
 import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -144,6 +145,7 @@ const confirmPasswordType = ref("password");
 
 const route = useRoute();
 const router = useRouter();
+const toast = useToast();
 
 const token = computed(() => route.query.token as string);
 
@@ -198,9 +200,16 @@ async function handleReset() {
       token: token.value,
       new_password: password.value,
     });
-    // TODO add toast before redirect
+    toast.add({
+      severity: "success",
+      summary: "Success",
+      detail: "Password has been reset",
+      life: 3000,
+    });
     // Redirect to login page after successful reset
-    router.push("/auth/login");
+    setTimeout(() => {
+      router.push("/auth/login");
+    }, 1000);
   } catch (error) {
     console.error("Password reset failed:", error);
   }
