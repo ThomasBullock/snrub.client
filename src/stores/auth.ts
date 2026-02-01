@@ -1,16 +1,11 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import api from "@/services/httpService";
-import { type User } from "@/types/user";
+import type { User } from "@/types/user";
+import type { AuthResponse } from "@/types/auth";
 
 // Re-export User type for convenience
 export type { User };
-
-// Define types for the API response
-interface AuthResponse {
-  access_token: string;
-  user: User;
-}
 
 export const useAuthStore = defineStore(
   "auth",

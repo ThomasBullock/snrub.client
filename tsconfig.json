@@ -1,3 +1,4 @@
+// Root/Orchestrator
 {
   "compilerOptions": {
     "types": ["node", "vite/client"],

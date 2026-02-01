@@ -1,11 +1,10 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import api from "@/services/httpService";
-import { type User, UserStatus } from "@/types/user";
+import type { User, UserStatus } from "@/types/user";
 
 // Re-export for convenience
-export type { User };
-export { UserStatus };
+export type { User, UserStatus };
 
 export const useUsersStore = defineStore("users", () => {
   // State
@@ -15,6 +14,17 @@ export const useUsersStore = defineStore("users", () => {
   const getAllUsers = computed(() => users.value);
 
   // Actions
+  async function createUser(userData: Partial<User>) {
+    try {
+      const response = await api.users.create(userData);
+      users.value.push(response);
+      return response;
+    } catch (err: any) {
+      console.error(`Error creating user:`, err);
+      throw err;
+    }
+  }
+
   async function fetchUsers() {
     try {
       const response = await api.users.get();
@@ -64,6 +74,7 @@ export const useUsersStore = defineStore("users", () => {
   return {
     users,
     getAllUsers,
+    createUser,
     fetchUsers,
     fetchUserById,
     updateUser,

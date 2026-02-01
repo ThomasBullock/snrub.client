@@ -47,6 +47,8 @@
               id="role"
               v-model="formData.role"
               :options="roleOptions"
+              option-label="label"
+              option-value="value"
               placeholder="Select a role"
               class="w-full"
               :invalid="v$.role.$error"
@@ -76,6 +78,22 @@
               {{ v$.userStatus.$errors[0]?.$message }}
             </small>
           </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="password" class="text-surface-900 dark:text-surface-0">Password *</label>
+            <Password
+              id="password"
+              v-model="formData.password"
+              class="w-full"
+              input-class="w-full"
+              toggle-mask
+              :invalid="v$.password.$error"
+              @blur="v$.password.$touch()"
+            />
+            <small v-if="v$.password.$error" class="text-red-500">
+              {{ v$.password.$errors[0]?.$message }}
+            </small>
+          </div>
         </div>
 
         <div class="flex gap-3">
@@ -97,32 +115,42 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
+import Password from "primevue/password";
 import Select from "primevue/select";
 import { useVuelidate } from "@vuelidate/core";
-import { required, email, maxLength, helpers } from "@vuelidate/validators";
-import { UserStatus } from "@/types/user";
-import { MAX_LENGTH, USER_ROLES } from "@/constants/validation";
+import { required, email, maxLength, minLength, helpers } from "@vuelidate/validators";
+import { USER_ROLES, USER_STATUS } from "@/constants/enums";
+import { MAX_LENGTH } from "@/constants/validation";
+import { formatLabel } from "@/utils";
+import { useUsersStore } from "@/stores/users";
 
 const router = useRouter();
+const usersStore = useUsersStore();
 
 // Form data
 const formData = ref({
   email: "",
   name: "",
   role: "",
-  userStatus: UserStatus.ACTIVE,
+  userStatus: USER_STATUS.ACTIVE,
+  password: "",
 });
 
 // Role options
-const roleOptions = ref([...USER_ROLES]);
+const roleOptions = ref(
+  Object.values(USER_ROLES).map((role) => ({
+    label: formatLabel(role),
+    value: role,
+  })),
+);
 
 // User status options
-const userStatusOptions = ref([
-  { label: "Active", value: UserStatus.ACTIVE },
-  { label: "Inactive", value: UserStatus.INACTIVE },
-  { label: "Deceased", value: UserStatus.DECEASED },
-  { label: "Suspended", value: UserStatus.SUSPENDED },
-]);
+const userStatusOptions = ref(
+  Object.values(USER_STATUS).map((status) => ({
+    label: formatLabel(status),
+    value: status,
+  })),
+);
 
 // Validation rules
 const rules = {
@@ -147,6 +175,25 @@ const rules = {
   userStatus: {
     required: helpers.withMessage("User status is required", required),
   },
+  password: {
+    required: helpers.withMessage("Password is required", required),
+    minLength: helpers.withMessage("Password must be at least 8 characters", minLength(8)),
+    hasDigit: helpers.withMessage("Password must contain at least one digit", (value: string) =>
+      /[0-9]/.test(value),
+    ),
+    hasUppercase: helpers.withMessage(
+      "Password must contain at least one uppercase letter",
+      (value: string) => /[A-Z]/.test(value),
+    ),
+    hasLowercase: helpers.withMessage(
+      "Password must contain at least one lowercase letter",
+      (value: string) => /[a-z]/.test(value),
+    ),
+    hasSpecialChar: helpers.withMessage(
+      "Password must contain at least one special character",
+      (value: string) => /[!@#$%^&*()\-_=+[\]{}|;:,.<>?/`~]/.test(value),
+    ),
+  },
 };
 
 const v$ = useVuelidate(rules, formData);
@@ -158,15 +205,14 @@ async function handleSubmit() {
     return;
   }
 
-  // TODO: Implement API call to create user
   console.log("Creating user:", formData.value);
-  // Example:
-  // try {
-  //   await usersStore.createUser(formData.value);
-  //   router.push({ name: "users" });
-  // } catch (error) {
-  //   console.error("Error creating user:", error);
-  // }
+
+  try {
+    await usersStore.createUser(formData.value);
+    router.push({ name: "users" });
+  } catch (error) {
+    console.error("Error creating user:", error);
+  }
 }
 
 function handleCancel() {
