@@ -11,6 +11,10 @@ In all interactions and commit messages, be extremely concise and sacrifice gram
 - Branch prefix: `feature/` or `bug/` depending on nature of work.
 - `main` is protected — always create a new branch for work.
 
+## Api Endpoints schema
+
+There is a shared/ folder adjacent to this repo and it contains an openapi.json export from the fastApi api service
+
 ## Tech Stack
 
 - Vue 3 + Vite + TypeScript
