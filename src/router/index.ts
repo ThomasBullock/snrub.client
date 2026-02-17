@@ -83,6 +83,12 @@ const router = createRouter({
                 import("@/views/dashboard/incidents/IncidentReports.vue"),
             },
             {
+              path: "reports/new",
+              name: "incidentReportCreate",
+              component: () =>
+                import("@/views/dashboard/incidents/IncidentReportCreate.vue"),
+            },
+            {
               path: "reports/:uid",
               name: "incidentReportDetail",
               component: () =>

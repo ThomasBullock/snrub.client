@@ -6,13 +6,12 @@
 
     <template v-else-if="report">
       <!-- Header -->
-      <div class="mb-6 flex justify-between items-center">
+      <div class="mb-6 flex justify-between items-center xl:w-3/4">
         <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">Incident Report</h1>
         <Button
           v-if="authStore.isAdmin"
           label="Edit"
           icon="pi pi-pencil"
-          variant="outlined"
           severity="primary"
           @click="router.push({ name: 'incidentReportEdit', params: { uid } })"
         />
@@ -20,7 +19,7 @@
 
       <!-- Details -->
       <div
-        class="bg-surface-0 dark:bg-surface-900 p-6 shadow-sm rounded-2xl flex flex-col gap-6 mb-6"
+        class="bg-surface-0 dark:bg-surface-900 p-6 shadow-sm rounded-2xl flex flex-col gap-6 mb-6 xl:w-3/4"
       >
         <div class="text-xl font-medium text-surface-900 dark:text-surface-0">Details</div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -51,7 +50,7 @@
 
       <!-- Timeline -->
       <div
-        class="bg-surface-0 dark:bg-surface-900 p-6 shadow-sm rounded-2xl flex flex-col gap-6 mb-6"
+        class="bg-surface-0 dark:bg-surface-900 p-6 shadow-sm rounded-2xl flex flex-col gap-6 mb-6 xl:w-3/4"
       >
         <div class="text-xl font-medium text-surface-900 dark:text-surface-0">Timeline</div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -79,7 +78,7 @@
       <!-- Subjects -->
       <div
         v-if="report.subjects && report.subjects.length"
-        class="bg-surface-0 dark:bg-surface-900 p-6 shadow-sm rounded-2xl flex flex-col gap-6 mb-6"
+        class="bg-surface-0 dark:bg-surface-900 p-6 shadow-sm rounded-2xl flex flex-col gap-6 mb-6 xl:w-3/4"
       >
         <div class="text-xl font-medium text-surface-900 dark:text-surface-0">Subjects</div>
         <div class="flex flex-col gap-4">

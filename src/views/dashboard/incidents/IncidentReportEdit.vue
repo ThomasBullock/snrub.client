@@ -11,7 +11,7 @@
         </h1>
       </div>
 
-      <div class="bg-surface-0 dark:bg-surface-900 p-7 shadow rounded-2xl flex-auto">
+      <div class="bg-surface-0 dark:bg-surface-900 p-7 shadow rounded-2xl flex-auto xl:w-3/4">
         <div class="flex flex-col gap-7">
           <div class="text-surface-900 dark:text-surface-0 font-semibold text-base">Details</div>
 
@@ -36,8 +36,8 @@
             </div>
 
             <!-- Severity -->
-            <div class="flex flex-col gap-2">
-              <label for="severity" class="text-surface-900 dark:text-surface-0">Severity *</label>
+            <div class="flex flex-col gap-2 md:w-3/4">
+              <label for="severity" class="text-surface-900 dark:text-surface-0">Severity</label>
               <InputNumber
                 id="severity"
                 v-model="formData.severity"
@@ -54,8 +54,8 @@
             </div>
 
             <!-- Status -->
-            <div class="flex flex-col gap-2">
-              <label for="status" class="text-surface-900 dark:text-surface-0">Status *</label>
+            <div class="flex flex-col gap-2 md:w-3/4">
+              <label for="status" class="text-surface-900 dark:text-surface-0">Status</label>
               <Select
                 id="status"
                 v-model="formData.status"
@@ -72,9 +72,9 @@
             </div>
 
             <!-- Escalation Level -->
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2 md:w-3/4">
               <label for="escalationLevel" class="text-surface-900 dark:text-surface-0"
-                >Escalation Level *</label
+                >Escalation Level</label
               >
               <Select
                 id="escalationLevel"
@@ -95,7 +95,9 @@
           <!-- Subjects -->
           <div class="flex flex-col gap-4">
             <div class="flex items-center justify-between">
-              <div class="text-surface-900 dark:text-surface-0 font-semibold text-base">Subjects</div>
+              <div class="text-surface-900 dark:text-surface-0 font-semibold text-base">
+                Subjects
+              </div>
               <Button
                 v-if="!showAddSubject"
                 label="Add Subject"
@@ -182,7 +184,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Button from "primevue/button";
 import Select from "primevue/select";
@@ -191,16 +193,14 @@ import InputNumber from "primevue/inputnumber";
 import Tag from "primevue/tag";
 import ProgressSpinner from "primevue/progressspinner";
 import { useVuelidate } from "@vuelidate/core";
-import { required, maxLength, between, helpers } from "@vuelidate/validators";
-import { INCIDENT_STATUS, ESCALATION_LEVEL, SUBJECT_ROLE } from "@/constants/enums";
-import { MAX_LENGTH } from "@/constants/validation";
+import { required, helpers } from "@vuelidate/validators";
+import { INCIDENT_STATUS, ESCALATION_LEVEL } from "@/constants/enums";
 import { useIncidentReportsStore } from "@/stores/incidentReports";
-import { useUsersStore } from "@/stores/users";
+import { useIncidentReportSubjects } from "@/composables/useIncidentReportSubjects";
 import { formatLabel } from "@/utils";
 import type {
   IncidentStatus,
   EscalationLevel,
-  SubjectRole,
   IncidentReportSubjectCreate,
 } from "@/types/incidentReport";
 import { useToast } from "primevue/usetoast";
@@ -211,7 +211,6 @@ const uid = route.params.uid as string;
 const toast = useToast();
 
 const incidentReportsStore = useIncidentReportsStore();
-const usersStore = useUsersStore();
 
 const isLoading = ref(false);
 
@@ -229,11 +228,16 @@ const formData = ref<{
   subjects: [],
 });
 
-const showAddSubject = ref(false);
-const newSubject = ref<{ user_id: string; role: SubjectRole | "" }>({
-  user_id: "",
-  role: "",
-});
+const {
+  showAddSubject,
+  newSubject,
+  subjectRoleOptions,
+  availableUsers,
+  getSubjectName,
+  addSubject,
+  removeSubject,
+  sharedRules,
+} = useIncidentReportSubjects(formData);
 
 // Options
 const statusOptions = Object.values(INCIDENT_STATUS).map((s) => ({
@@ -246,49 +250,9 @@ const escalationLevelOptions = Object.values(ESCALATION_LEVEL).map((e) => ({
   value: e,
 }));
 
-const subjectRoleOptions = Object.values(SUBJECT_ROLE).map((r) => ({
-  label: formatLabel(r),
-  value: r,
-}));
-
-// Available users (exclude already-added subjects)
-const availableUsers = computed(() => {
-  const existingUserIds = formData.value.subjects.map((s) => s.user_id);
-  return usersStore.getAllUsers.filter((u) => !existingUserIds.includes(u.uid));
-});
-
-function getSubjectName(userId: string): string {
-  const user = usersStore.getUserById(userId);
-  return user?.name ?? userId;
-}
-
-// Subject management
-function addSubject() {
-  if (!newSubject.value.user_id || !newSubject.value.role) return;
-  formData.value.subjects.push({
-    user_id: newSubject.value.user_id,
-    role: newSubject.value.role as SubjectRole,
-  });
-  newSubject.value = { user_id: "", role: "" };
-  showAddSubject.value = false;
-}
-
-function removeSubject(index: number) {
-  formData.value.subjects.splice(index, 1);
-}
-
 // Validation
 const rules = {
-  description: {
-    maxLength: helpers.withMessage(
-      `Description must not exceed ${MAX_LENGTH.REPORT_DESCRIPTION} characters`,
-      maxLength(MAX_LENGTH.REPORT_DESCRIPTION),
-    ),
-  },
-  severity: {
-    required: helpers.withMessage("Severity is required", required),
-    between: helpers.withMessage("Severity must be between 1 and 7", between(1, 7)),
-  },
+  ...sharedRules,
   status: {
     required: helpers.withMessage("Status is required", required),
   },
