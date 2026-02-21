@@ -63,8 +63,13 @@ export const useIncidentReportsStore = defineStore("incidentReports", () => {
     }
   }
 
+  function $reset() {
+    incidentReports.value = {};
+  }
+
   return {
     incidentReports,
+    $reset,
     getAllIncidentReports,
     getIncidentReportById,
     createIncidentReport,

@@ -88,8 +88,13 @@ export const useUsersStore = defineStore("users", () => {
     }
   }
 
+  function $reset() {
+    users.value = [];
+  }
+
   return {
     users,
+    $reset,
     getAllUsers,
     getUserById,
     createUser,
