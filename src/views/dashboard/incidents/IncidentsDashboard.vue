@@ -29,8 +29,26 @@
         </div>
       </div>
 
-      <div v-if="isLoading">
-        <ProgressSpinner />
+      <div v-if="isLoading" class="flex flex-col gap-4">
+        <div
+          v-for="i in 5"
+          :key="i"
+          class="flex items-center rounded-xl border overflow-hidden border-zinc-200 dark:border-zinc-700"
+        >
+          <Skeleton width="0.875rem" height="4rem" class="sm:block hidden shrink-0" />
+          <div class="flex items-center justify-between w-full p-4 gap-4">
+            <div class="flex flex-col gap-1">
+              <Skeleton width="8rem" height="1.25rem" />
+              <Skeleton width="5rem" height="0.875rem" />
+            </div>
+            <Skeleton width="50%" height="1rem" class="hidden md:block" />
+            <div class="flex items-center gap-3">
+              <Skeleton width="4rem" height="1.5rem" borderRadius="16px" />
+              <Skeleton width="4rem" height="1.5rem" borderRadius="16px" />
+              <Skeleton shape="circle" size="2rem" />
+            </div>
+          </div>
+        </div>
       </div>
       <div v-else class="flex flex-col gap-4">
         <div
@@ -87,7 +105,7 @@ import { useIncidentTypesStore } from "@/stores/incidentTypes";
 import { useIncidentReportsStore } from "@/stores/incidentReports";
 import Button from "primevue/button";
 import Tag from "primevue/tag";
-import ProgressSpinner from "primevue/progressspinner";
+import Skeleton from "primevue/skeleton";
 import SeverityBadge from "@/components/SeverityBadge.vue";
 import type { EnrichedReport } from "@/types/incidentReport";
 import { INCIDENT_STATUS } from "@/constants/enums";
@@ -108,27 +126,6 @@ const enrichedReports = computed<EnrichedReport[]>(() =>
     incidentType: incidentTypesStore.getIncidentTypeById(report.incident_type_id),
   })),
 );
-
-const getStatusColorClass = (status: string) => {
-  switch (status) {
-    case INCIDENT_STATUS.REPORTED:
-      return "bg-blue-500";
-    case INCIDENT_STATUS.UNDER_REVIEW:
-      return "bg-surface-500";
-    case INCIDENT_STATUS.FALSE_ALARM:
-      return "bg-red-500";
-    case INCIDENT_STATUS.CONTAINED:
-      return "bg-success-500";
-    case INCIDENT_STATUS.MITIGATION_IN_PROGRESS:
-      return "bg-warn-500";
-    case INCIDENT_STATUS.RESOLVED:
-      return "bg-success-500";
-    case INCIDENT_STATUS.CLOSED:
-      return "bg-success-500";
-    default:
-      return "bg-gray-500";
-  }
-};
 
 onMounted(async () => {
   isLoading.value = true;

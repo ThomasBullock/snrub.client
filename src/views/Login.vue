@@ -137,7 +137,7 @@ function handleLogin() {
     .then((res: any) => {
       // should use a more specific type for the API response instead of any
       console.log(res.data);
-      router.push({ name: "dashboardIndex" });
+      router.push({ name: "dashboardHome" });
     })
     .catch((error) => {
       if (error instanceof HttpError) {
