@@ -62,8 +62,13 @@ export const useIncidentTypesStore = defineStore("incidentTypes", () => {
     }
   }
 
+  function $reset() {
+    incidentTypes.value = {};
+  }
+
   return {
     incidentTypes,
+    $reset,
     getAllIncidentTypes,
     getIncidentTypeById,
     createIncidentType,

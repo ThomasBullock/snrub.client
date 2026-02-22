@@ -39,7 +39,7 @@
           </div>
           <div>
             <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-1">Escalation Level</div>
-            <Tag :value="formatLabel(report.escalation_level)" severity="info" />
+            <Tag :value="formatLabel(report.escalation_level)" :severity="getEscalationSeverity(report.escalation_level)" />
           </div>
         </div>
         <div v-if="report.description">
@@ -63,14 +63,6 @@
           <div>
             <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-1">Reported By</div>
             <div class="text-surface-900 dark:text-surface-0">{{ reportedByName }}</div>
-          </div>
-          <div>
-            <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-1">Created</div>
-            <div class="text-surface-900 dark:text-surface-0">{{ formatDate(report.created) }}</div>
-          </div>
-          <div>
-            <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-1">Updated</div>
-            <div class="text-surface-900 dark:text-surface-0">{{ formatDate(report.updated) }}</div>
           </div>
         </div>
       </div>
@@ -115,7 +107,7 @@ import { useIncidentReportsStore } from "@/stores/incidentReports";
 import { useIncidentTypesStore } from "@/stores/incidentTypes";
 import { useUsersStore } from "@/stores/users";
 import { formatDate, formatTime, formatLabel } from "@/utils";
-import { getTagSeverity } from "@/utils/incident";
+import { getTagSeverity, getEscalationSeverity } from "@/utils/incident";
 import Button from "primevue/button";
 import Tag from "primevue/tag";
 import ProgressSpinner from "primevue/progressspinner";

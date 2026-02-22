@@ -87,15 +87,19 @@ export const useAuthStore = defineStore(
       }
     }
 
+    function $reset() {
+      user.value = null;
+      token.value = null;
+      localStorage.removeItem("auth");
+    }
+
     async function logout() {
       try {
         await api.auth.logout();
-        setUser(null);
-        setToken(null);
-        return;
       } catch (error) {
         console.error("Logout failed:", error);
-        return;
+      } finally {
+        $reset();
       }
     }
 
@@ -111,6 +115,7 @@ export const useAuthStore = defineStore(
       login,
       loginGoogle,
       logout,
+      $reset,
       reset,
       resetPassword,
     };

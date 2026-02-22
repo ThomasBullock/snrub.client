@@ -63,19 +63,19 @@
 }
 
 .p-drawer-left .p-drawer {
-    @apply w-80 h-full border-r
+    @apply w-80 h-full border-r border-r-surface-200 dark:border-r-surface-700
 }
 
 .p-drawer-right .p-drawer {
-    @apply w-80 h-full border-s
+    @apply w-80 h-full border-s border-s-surface-200 dark:border-s-surface-700
 }
 
 .p-drawer-top .p-drawer {
-    @apply h-40 w-full border-b
+    @apply h-40 w-full border-b border-b-surface-200 dark:border-b-surface-700
 }
 
 .p-drawer-bottom .p-drawer {
-    @apply h-40 w-full border-t
+    @apply h-40 w-full border-t border-t-surface-200 dark:border-t-surface-700
 }
 
 .p-drawer-left .p-drawer-content,
