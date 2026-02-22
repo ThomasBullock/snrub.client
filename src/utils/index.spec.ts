@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { formatLabel, capitalizeFirstLetter } from "./index";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { formatLabel, capitalizeFirstLetter, timeAgo } from "./index";
 
 describe("capitalizeFirstLetter", () => {
   it("capitalizes the first letter of a lowercase word", () => {
@@ -62,6 +62,33 @@ describe("formatLabel", () => {
 
   it("handles strings with no underscores and mixed case", () => {
     expect(formatLabel("HelloWorld")).toBe("HelloWorld");
+  });
+});
+
+describe("timeAgo", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2025-01-15T12:00:00Z"));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("returns hours ago for less than 24h", () => {
+    expect(timeAgo("2025-01-15T06:00:00Z")).toBe("6h ago");
+  });
+
+  it("returns minimum 1h for very recent times", () => {
+    expect(timeAgo("2025-01-15T11:55:00Z")).toBe("1h ago");
+  });
+
+  it("returns days ago for 24h or more", () => {
+    expect(timeAgo("2025-01-12T12:00:00Z")).toBe("3d ago");
+  });
+
+  it("returns 1d ago at exactly 24h boundary", () => {
+    expect(timeAgo("2025-01-14T12:00:00Z")).toBe("1d ago");
   });
 });
 

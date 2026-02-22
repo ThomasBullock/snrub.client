@@ -22,3 +22,12 @@ export const formatDate = (dateString: string) => {
 export const formatTime = (dateString: string) => {
   return new Date(dateString).toLocaleTimeString("en-US");
 };
+
+export function timeAgo(dateString: string): string {
+  const diffMs = Date.now() - new Date(dateString).getTime();
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+  if (diffHours >= 24) {
+    return `${Math.floor(diffHours / 24)}d ago`;
+  }
+  return `${Math.max(diffHours, 1)}h ago`;
+}

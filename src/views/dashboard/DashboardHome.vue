@@ -47,110 +47,31 @@
     <!-- Loaded content -->
     <template v-else>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 pt-8 mb-4">
-        <div class="bg-surface-0 dark:bg-surface-900 shadow-sm p-5 rounded-2xl flex flex-col gap-4">
-          <div class="flex justify-between gap-4">
-            <div class="flex flex-col gap-2">
-              <span class="text-surface-700 dark:text-surface-300 font-semibold leading-tight"
-                >Major Accidents</span
+        <Card v-for="card in statCards" :key="card.title" class="stat-card">
+          <template #content>
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-surface-700 dark:text-surface-300 font-semibold leading-tight">
+                {{ card.title }}
+              </span>
+              <div
+                :class="[card.gradient, 'flex items-center justify-center rounded-lg w-10 h-10']"
               >
+                <i
+                  :class="[
+                    card.icon,
+                    'text-surface-0 dark:text-surface-900 text-xl! leading-none!',
+                  ]"
+                />
+              </div>
             </div>
-            <div
-              class="flex items-center justify-center bg-gradient-to-b from-fuchsia-400 to-fuchsia-600 dark:from-fuchsia-300 dark:to-fuchsia-500 rounded-lg w-10 h-10"
-            >
-              <i
-                class="pi pi-exclamation-triangle text-surface-0 dark:text-surface-900 text-xl! leading-none!"
+            <div class="flex-1 flex gap-1">
+              <span
+                class="text-surface-600 dark:text-surface-300 leading-tight"
+                v-html="card.copy"
               />
             </div>
-          </div>
-          <div class="flex-1 flex items-end gap-1">
-            <span class="text-surface-600 dark:text-surface-300 leading-tight"
-              ><b>{{ majorAccidents.length }}</b> Major accident{{
-                majorAccidents.length > 1 ? "s" : ""
-              }}
-              reported in the last 7 days</span
-            >
-          </div>
-        </div>
-
-        <div class="bg-surface-0 dark:bg-surface-900 shadow-sm p-5 rounded-2xl flex flex-col gap-4">
-          <div class="flex justify-between gap-4">
-            <div class="flex flex-col gap-2">
-              <span class="text-surface-700 dark:text-surface-300 font-semibold leading-tight"
-                >Accidents</span
-              >
-            </div>
-            <div
-              :class="[
-                accidentCardState.gradient,
-                'flex items-center justify-center rounded-lg w-10 h-10',
-              ]"
-            >
-              <i
-                :class="[
-                  accidentCardState.icon,
-                  'text-surface-0 dark:text-surface-900 text-xl! leading-none!',
-                ]"
-              />
-            </div>
-          </div>
-          <div class="flex-1 flex items-end gap-1">
-            <span
-              class="text-surface-600 dark:text-surface-300 leading-tight"
-              v-html="accidentCardState.copy"
-            />
-          </div>
-        </div>
-
-        <div class="bg-surface-0 dark:bg-surface-900 shadow-sm p-5 rounded-2xl flex flex-col gap-4">
-          <div class="flex justify-between gap-4">
-            <div class="flex flex-col gap-2">
-              <span class="text-surface-700 dark:text-surface-300 font-semibold leading-tight"
-                >Incidents</span
-              >
-            </div>
-            <div
-              :class="[
-                incidentCardState.gradient,
-                'flex items-center justify-center rounded-lg w-10 h-10',
-              ]"
-            >
-              <i
-                :class="[
-                  incidentCardState.icon,
-                  'text-surface-0 dark:text-surface-900 text-xl! leading-none!',
-                ]"
-              />
-            </div>
-          </div>
-          <div class="flex-1 flex items-end gap-1">
-            <span
-              class="text-surface-600 dark:text-surface-300 leading-tight"
-              v-html="incidentCardState.copy"
-            />
-          </div>
-        </div>
-
-        <div class="bg-surface-0 dark:bg-surface-900 shadow-sm p-5 rounded-2xl flex flex-col gap-4">
-          <div class="flex justify-between gap-4">
-            <div class="flex flex-col gap-2">
-              <span class="text-surface-700 dark:text-surface-300 font-semibold leading-tight"
-                >Awaiting review</span
-              >
-            </div>
-            <div
-              class="flex items-center justify-center bg-gradient-to-b from-info-200 to-info-400 dark:from-info-100 dark:to-info-300 rounded-lg w-10 h-10"
-            >
-              <i
-                class="pi pi-info-circle text-surface-0 dark:text-surface-900 text-xl! leading-none!"
-              />
-            </div>
-          </div>
-          <div class="flex-1 flex items-end">
-            <span class="text-surface-600 dark:text-surface-300 leading-tight"
-              ><b>{{ reportsNotActioned.length }}</b> incidents reported in the last 7 days</span
-            >
-          </div>
-        </div>
+          </template>
+        </Card>
       </div>
 
       <div class="bg-surface-0 dark:bg-surface-900 p-6 shadow-sm rounded-2xl flex flex-col gap-8">
@@ -207,9 +128,11 @@ import { useIncidentReportsStore } from "@/stores/incidentReports";
 import { useIncidentTypesStore } from "@/stores/incidentTypes";
 import { useUsersStore } from "@/stores/users";
 import type { IncidentReport } from "@/types/incidentReport";
-import { formatLabel } from "@/utils";
+import { formatLabel, timeAgo } from "@/utils";
+import { GRADIENTS } from "@/utils/gradients";
 import { getEscalationSeverity } from "@/utils/incident";
 import Button from "primevue/button";
+import Card from "primevue/card";
 import Skeleton from "primevue/skeleton";
 import Tag from "primevue/tag";
 import { computed, onBeforeMount, ref } from "vue";
@@ -237,33 +160,47 @@ const reportsNotActioned = computed(() =>
   recentReports.value.filter((r) => r.status === INCIDENT_STATUS.REPORTED),
 );
 
-const successGradient =
-  "bg-gradient-to-b from-success-300 to-success-500 dark:from-success-200 dark:to-success-400";
+interface DashboardStatCard {
+  title: string;
+  icon: string;
+  gradient: string;
+  copy: string;
+}
 
-const accidentCardState = computed(() => {
-  const hasNone = accidents.value.length === 0;
-  return {
-    icon: hasNone ? "pi pi-check-circle" : "pi pi-exclamation-circle",
-    gradient: hasNone
-      ? successGradient
-      : "bg-gradient-to-b from-danger-300 to-danger-500 dark:from-danger-200 dark:to-danger-400",
-    copy: hasNone
-      ? "No Accidents reported in the last 7 days"
-      : `<b>${accidents.value.length}</b> Accident${accidents.value.length > 1 ? "s" : ""} reported in the last 7 days`,
-  };
-});
+const statCards = computed<DashboardStatCard[]>(() => {
+  const hasNoAccidents = accidents.value.length === 0;
+  const hasNoIncidents = incidents.value.length === 0;
 
-const incidentCardState = computed(() => {
-  const hasNone = incidents.value.length === 0;
-  return {
-    icon: hasNone ? "pi pi-check-circle" : "pi pi-exclamation-circle",
-    gradient: hasNone
-      ? successGradient
-      : "bg-gradient-to-b from-warn-300 to-warn-500 dark:from-warn-200 dark:to-warn-400",
-    copy: hasNone
-      ? "No Incidents reported in the last 7 days"
-      : `<b>${incidents.value.length}</b> Incident${incidents.value.length > 1 ? "s" : ""} reported in the last 7 days`,
-  };
+  return [
+    {
+      title: "Major Accidents",
+      icon: "pi pi-exclamation-triangle",
+      gradient: GRADIENTS.fuchsia,
+      copy: `<b>${majorAccidents.value.length}</b> Major accident${majorAccidents.value.length > 1 ? "s" : ""} reported in the last 7 days`,
+    },
+    {
+      title: "Accidents",
+      icon: hasNoAccidents ? "pi pi-check-circle" : "pi pi-exclamation-circle",
+      gradient: hasNoAccidents ? GRADIENTS.success : GRADIENTS.danger,
+      copy: hasNoAccidents
+        ? "No Accidents reported in the last 7 days"
+        : `<b>${accidents.value.length}</b> Accident${accidents.value.length > 1 ? "s" : ""} reported in the last 7 days`,
+    },
+    {
+      title: "Incidents",
+      icon: hasNoIncidents ? "pi pi-check-circle" : "pi pi-exclamation-circle",
+      gradient: hasNoIncidents ? GRADIENTS.success : GRADIENTS.warn,
+      copy: hasNoIncidents
+        ? "No Incidents reported in the last 7 days"
+        : `<b>${incidents.value.length}</b> Incident${incidents.value.length > 1 ? "s" : ""} reported in the last 7 days`,
+    },
+    {
+      title: "Awaiting review",
+      icon: "pi pi-info-circle",
+      gradient: GRADIENTS.info,
+      copy: `<b>${reportsNotActioned.value.length}</b> incidents reported in the last 7 days`,
+    },
+  ];
 });
 
 const criticalActivityLog = computed(() => {
@@ -296,15 +233,6 @@ const criticalActivityLog = computed(() => {
 
   return result;
 });
-
-function timeAgo(dateString: string): string {
-  const diffMs = Date.now() - new Date(dateString).getTime();
-  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-  if (diffHours >= 24) {
-    return `${Math.floor(diffHours / 24)}d ago`;
-  }
-  return `${Math.max(diffHours, 1)}h ago`;
-}
 
 function getReportedByName(userId: string): string {
   return usersStore.getUserById(userId)?.name ?? userId;
