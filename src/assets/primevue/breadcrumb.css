@@ -1,5 +1,5 @@
 .p-breadcrumb {
-    @apply bg-surface-0 dark:bg-surface-900 p-4 overflow-x-auto
+    @apply bg-surface-0 dark:bg-surface-900 p-0 overflow-x-auto
 }
 
 .p-breadcrumb-list {

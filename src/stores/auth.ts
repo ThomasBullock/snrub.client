@@ -18,7 +18,7 @@ export const useAuthStore = defineStore(
     // Getters
     const isLoggedIn = computed(() => !!user.value && !!token.value);
     const getAuthUser = computed(() => {
-      if (isLoggedIn) {
+      if (isLoggedIn.value) {
         return user.value;
       }
     });
@@ -121,8 +121,6 @@ export const useAuthStore = defineStore(
     };
   },
   {
-    persist: {
-      enabled: true,
-    },
+    persist: true,
   },
 );
