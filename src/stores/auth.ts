@@ -121,8 +121,6 @@ export const useAuthStore = defineStore(
     };
   },
   {
-    persist: {
-      enabled: true,
-    },
+    persist: true,
   },
 );
