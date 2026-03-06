@@ -42,7 +42,7 @@
               severity="secondary"
               variant="text"
               as="router-link"
-              :to="{ name: 'Forgot' }"
+              to="/auth/forgot-password"
             >
             </Button>
           </div>

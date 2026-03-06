@@ -27,7 +27,6 @@
         </div>
       </div>
       <div class="flex-1 overflow-hidden">
-        <!-- src="/img/power-plant-hero.png" -->
         <img
           src="/img/power-plant-hero.png"
           alt="hero-1"

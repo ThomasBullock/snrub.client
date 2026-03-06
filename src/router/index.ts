@@ -15,17 +15,15 @@ const router = createRouter({
       component: () => import("@/views/auth/AuthIndex.vue"),
       children: [
         { path: "login", name: "Login", component: () => import("@/views/Login.vue") },
-        { path: "forgot", name: "Forgot", component: () => import("@/views/ForgotPassword.vue") },
+        {
+          path: "forgot-password",
+          name: "forgotPassword",
+          component: () => import("@/views/ForgotPassword.vue"),
+        },
         {
           path: "callback",
           name: "Callback",
           component: () => import("@/views/auth/AuthCallback.vue"),
-        },
-        // { path: "spotify-callback", name: "SpotifyCallback", component: () => import("@/views/SpotifyCallback.vue") },
-        {
-          path: "reset-password",
-          name: "Forgot",
-          component: () => import("@/views/ForgotPassword.vue"),
         },
       ],
     },
@@ -153,7 +151,7 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach(async (to, from) => {
+router.beforeEach(async (to) => {
   const authStore = useAuthStore();
   const isAuthenticated = authStore.isLoggedIn;
   if (
@@ -161,7 +159,8 @@ router.beforeEach(async (to, from) => {
     !isAuthenticated &&
     // ❗️ Avoid an infinite redirect
     to.name !== "Login" &&
-    to.name !== "Forgot" &&
+    to.name !== "forgotPassword" &&
+    to.name !== "resetPassword" &&
     to.name !== "Callback"
   ) {
     // redirect the user to the login page
