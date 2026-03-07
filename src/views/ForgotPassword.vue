@@ -50,7 +50,7 @@
         <Button
           @click="handleReset"
           label="Reset Password"
-          severity="secondary"
+          severity="primary"
           icon="pi pi-user"
           class="w-full p-4"
         />
