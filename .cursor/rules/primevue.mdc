@@ -1,0 +1,26 @@
+---
+description: PrimeVue architecture, styling, and doc lookup for Cursor
+alwaysApply: true
+---
+
+# PrimeVue Component Guidelines
+
+## Architecture
+
+- PrimeVue configured with **no theme** (`theme: "none"`).
+- Styling via **tailwindcss-primeui** plugin.
+- Component-specific styles in `src/assets/primevue/`.
+
+## Styling Approach
+
+- Use Tailwind v3 utility classes.
+- Component styles in individual CSS files (e.g. `src/assets/primevue/button.css`).
+- Theme via CSS variables in `src/assets/main.css`.
+- Custom palette: primary (purple), surface (gray), danger, success, info, warn.
+- Colors: CSS variables (e.g. `var(--p-primary-700)`) and Tailwind classes (e.g. `text-primary-700`).
+
+## PrimeVue Documentation Lookup (Cursor)
+
+- **Component Markdown**: `https://primevue.org/{component}.md` (e.g. `https://primevue.org/button.md`, `https://primevue.org/datatable.md`).
+- **LLM index**: `https://primevue.org/llms/` — use llms.txt for key pages, llms-full.txt for full doc list.
+- Fetch these URLs when you need component API, props, or usage.

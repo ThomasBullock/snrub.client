@@ -1,0 +1,24 @@
+---
+description: Vue frontend repository structure
+alwaysApply: true
+---
+
+# Repository Overview
+
+Vue 3 + Vite + TypeScript frontend.
+
+## Project Structure
+
+```
+src/
+├── assets/       # Static assets, CSS, PrimeVue component styles
+├── components/   # Reusable Vue components
+├── constants/
+├── router/
+├── services/     # API services and HTTP client
+├── stores/       # Pinia state management
+├── types/        # TypeScript type definitions
+└── views/        # Page-level components (e.g. auth/, dashboard/)
+public/           # Public static assets
+e2e/              # Playwright end-to-end tests
+```
