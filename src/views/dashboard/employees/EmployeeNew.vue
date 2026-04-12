@@ -1,16 +1,14 @@
 <template>
-  <div class="px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8 bg-surface-50 dark:bg-surface-950 h-screen">
+  <div
+    class="px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8 bg-surface-50 dark:bg-surface-950 h-screen"
+  >
     <div class="mb-4 flex justify-between items-center">
-      <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">Add new user</h1>
+      <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">Add New Employee</h1>
     </div>
 
-    <div
-      class="bg-surface-0 dark:bg-surface-900 p-7 shadow rounded-2xl flex-auto xl:w-3/4"
-    >
+    <div class="bg-surface-0 dark:bg-surface-900 p-7 shadow rounded-2xl flex-auto xl:w-3/4">
       <div class="flex flex-col gap-7">
-        <div class="text-xl font-medium text-surface-900 dark:text-surface-0">
-          User Information
-        </div>
+        <div class="text-xl font-medium text-surface-900 dark:text-surface-0">Employee Information</div>
 
         <div class="flex flex-col gap-6">
           <div class="flex flex-col gap-2">
@@ -63,7 +61,7 @@
 
           <div class="flex flex-col gap-2">
             <label for="userStatus" class="text-surface-900 dark:text-surface-0"
-              >User Status *</label
+              >Employee Status *</label
             >
             <Select
               id="userStatus"
@@ -71,7 +69,7 @@
               :options="userStatusOptions"
               option-label="label"
               option-value="value"
-              placeholder="Select user status"
+              placeholder="Select employee status"
               class="w-full"
               :invalid="v$.status.$error"
               @blur="v$.status.$touch()"
@@ -100,7 +98,7 @@
 
         <div class="flex gap-3">
           <Button
-            label="Create User"
+            label="Create Employee"
             severity="primary"
             :disabled="v$.$invalid"
             @click="handleSubmit"
@@ -175,7 +173,7 @@ const rules = {
     required: helpers.withMessage("Role is required", required),
   },
   status: {
-    required: helpers.withMessage("User status is required", required),
+    required: helpers.withMessage("Employee status is required", required),
   },
   password: {
     required: helpers.withMessage("Password is required", required),
@@ -208,14 +206,14 @@ async function handleSubmit() {
   }
 
   try {
-    await usersStore.createUser(formData.value);
-    router.push({ name: "team" });
+    const user = await usersStore.createUser(formData.value);
+    router.push({ name: "employeeDetail", params: { uid: user.uid } });
   } catch (error) {
     console.error("Error creating user:", error);
   }
 }
 
 function handleCancel() {
-  router.push({ name: "team" });
+  router.push({ name: "employees" });
 }
 </script>

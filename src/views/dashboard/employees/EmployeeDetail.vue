@@ -1,5 +1,7 @@
 <template>
-  <div class="px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8 bg-surface-50 dark:bg-surface-950 h-screen overflow-y-auto">
+  <div
+    class="px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8 bg-surface-50 dark:bg-surface-950 h-screen overflow-y-auto"
+  >
     <div v-if="isLoading" class="flex justify-center py-20">
       <ProgressSpinner />
     </div>
@@ -7,14 +9,14 @@
     <template v-else-if="user">
       <!-- Header -->
       <div class="mb-4 flex justify-between items-center xl:w-3/4">
-        <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">Team Member</h1>
+        <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">Employee Details</h1>
         <Button
           v-if="authStore.isAdmin"
           label="Edit"
           icon="pi pi-pencil"
           severity="primary"
-          data-testid="edit-user-btn"
-          @click="router.push({ name: 'teamMemberEdit', params: { uid } })"
+          data-testid="edit-employee-btn"
+          @click="router.push({ name: 'employeeEdit', params: { uid } })"
         />
       </div>
 
@@ -27,30 +29,34 @@
           <div class="flex-shrink-0">
             <img
               :src="getUserAvatar"
-              alt="User avatar"
+              alt="Employee avatar"
               class="h-32 w-32 rounded-lg object-cover border border-surface-300"
             />
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
             <div>
               <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-1">Name</div>
-              <div class="text-surface-900 dark:text-surface-0" data-testid="user-detail-name">
+              <div class="text-surface-900 dark:text-surface-0" data-testid="employee-detail-name">
                 {{ user.name }}
               </div>
             </div>
             <div>
               <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-1">Email</div>
-              <div class="text-surface-900 dark:text-surface-0" data-testid="user-detail-email">
+              <div class="text-surface-900 dark:text-surface-0" data-testid="employee-detail-email">
                 {{ user.email }}
               </div>
             </div>
             <div>
               <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-1">Role</div>
-              <Tag :value="formatLabel(user.role)" severity="info" data-testid="user-detail-role" />
+              <Tag :value="formatLabel(user.role)" severity="info" data-testid="employee-detail-role" />
             </div>
             <div>
               <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-1">Status</div>
-              <Tag :value="formatLabel(user.status)" :severity="getStatusSeverity(user.status)" data-testid="user-detail-status" />
+              <Tag
+                :value="formatLabel(user.status)"
+                :severity="getStatusSeverity(user.status)"
+                data-testid="employee-detail-status"
+              />
             </div>
           </div>
         </div>
@@ -116,7 +122,7 @@ function handleGoBack() {
   if (window.history.state.back) {
     router.back();
   } else {
-    router.push({ name: "team" });
+    router.push({ name: "employeeEdit", params: { uid: user.value?.uid } });
   }
 }
 
