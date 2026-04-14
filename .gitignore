@@ -14,9 +14,6 @@ dist-ssr
 coverage
 *.local
 
-/cypress/videos/
-/cypress/screenshots/
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -29,10 +26,6 @@ coverage
 
 *.tsbuildinfo
 
-test-results/
-playwright-report/
-
 .env
 .env.development
 .env.production
-.env.e2e

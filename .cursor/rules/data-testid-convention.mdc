@@ -1,0 +1,66 @@
+---
+description: data-testid naming convention for all interactive elements
+globs: ["src/**/*.vue", "src/**/*.tsx", "src/**/*.jsx", "e2e/**/*.ts"]
+alwaysApply: true
+---
+
+# data-testid Convention
+
+## Pattern
+
+```
+data-testid="domain.component.element-type"
+```
+
+All three segments are **required**. Use kebab-case within each segment. Separate segments with `.`.
+
+| Segment | Description | Examples |
+|---|---|---|
+| `domain` | Feature area or route domain | `auth`, `nav`, `employees`, `incidents`, `reporting` |
+| `component` | The specific component or form within that domain | `login-form`, `sidebar`, `list`, `detail`, `edit-form` |
+| `element-type` | What the element is and/or does | `email-input`, `submit-btn`, `table`, `error-message`, `back-btn` |
+
+## Rules
+
+- **Stable**: never derived from dynamic content (no IDs, indices, user-generated strings)
+- **Unique**: the full three-part string must be unique within the domain
+- **Consistent element suffixes**: use `‑btn` for buttons, `‑input` for text/number/date inputs, `‑select` for dropdowns, `‑table` for tables, `‑link` for navigation anchors/router-links, `‑message` for inline feedback, `‑dialog` for modals
+- **Framework-agnostic**: the same convention applies to Vue, React, and Angular repos; copy this rule verbatim
+
+## Examples
+
+```html
+<!-- Auth -->
+<input data-testid="auth.login-form.email-input" />
+<button data-testid="auth.login-form.sign-in-btn" />
+<span data-testid="auth.login-form.error-message" />
+<button data-testid="auth.forgot-password-form.submit-btn" />
+
+<!-- Navigation -->
+<a data-testid="nav.sidebar.home-link" />
+<a data-testid="nav.sidebar.logout-btn" />
+
+<!-- Employees feature -->
+<button data-testid="employees.list.add-btn" />
+<table data-testid="employees.list.table" />
+<button data-testid="employees.list.delete-btn" />
+<button data-testid="employees.detail.edit-btn" />
+<span data-testid="employees.detail.name" />
+<button data-testid="employees.edit-form.cancel-btn" />
+```
+
+## In Page Object Models (Playwright)
+
+Reference test IDs using the full dot-notation string:
+
+```ts
+this.emailInput = page.getByTestId('auth.login-form.email-input')
+this.submitButton = page.getByTestId('auth.login-form.sign-in-btn')
+```
+
+## Do Not
+
+- Use the old flat kebab-case format: ~~`data-testid="email-input"`~~
+- Embed dynamic values: ~~`data-testid="`employee-${uid}`"`~~
+- Omit any of the three segments: ~~`data-testid="login.email-input"`~~
+- Use underscores or camelCase: ~~`data-testid="auth.loginForm.emailInput"`~~
