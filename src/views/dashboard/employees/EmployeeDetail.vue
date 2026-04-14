@@ -15,7 +15,7 @@
           label="Edit"
           icon="pi pi-pencil"
           severity="primary"
-          data-testid="edit-employee-btn"
+          data-testid="employees.detail.edit-btn"
           @click="router.push({ name: 'employeeEdit', params: { uid } })"
         />
       </div>
@@ -36,26 +36,26 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
             <div>
               <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-1">Name</div>
-              <div class="text-surface-900 dark:text-surface-0" data-testid="employee-detail-name">
+              <div class="text-surface-900 dark:text-surface-0" data-testid="employees.detail.name">
                 {{ user.name }}
               </div>
             </div>
             <div>
               <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-1">Email</div>
-              <div class="text-surface-900 dark:text-surface-0" data-testid="employee-detail-email">
+              <div class="text-surface-900 dark:text-surface-0" data-testid="employees.detail.email">
                 {{ user.email }}
               </div>
             </div>
             <div>
               <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-1">Role</div>
-              <Tag :value="formatLabel(user.role)" severity="info" data-testid="employee-detail-role" />
+              <Tag :value="formatLabel(user.role)" severity="info" data-testid="employees.detail.role" />
             </div>
             <div>
               <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-1">Status</div>
               <Tag
                 :value="formatLabel(user.status)"
                 :severity="getStatusSeverity(user.status)"
-                data-testid="employee-detail-status"
+                data-testid="employees.detail.status"
               />
             </div>
           </div>
@@ -68,7 +68,7 @@
         icon="pi pi-arrow-left"
         variant="outlined"
         severity="secondary"
-        data-testid="back-btn"
+        data-testid="employees.detail.back-btn"
         @click="handleGoBack"
       />
     </template>

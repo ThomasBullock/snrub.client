@@ -13,12 +13,12 @@ export class EmployeeEditPage {
   constructor(page: Page) {
     this.page = page;
     this.heading = page.getByRole("heading", { name: "Edit Employee Details", level: 1 });
-    this.emailInput = page.getByTestId("email-input");
-    this.nameInput = page.getByTestId("name-input");
-    this.roleSelect = page.getByTestId("role-select");
-    this.statusSelect = page.getByTestId("status-select");
-    this.updateButton = page.getByTestId("update-employee-btn");
-    this.cancelButton = page.getByTestId("cancel-btn");
+    this.emailInput = page.getByTestId("employees.edit-form.email-input");
+    this.nameInput = page.getByTestId("employees.edit-form.name-input");
+    this.roleSelect = page.getByTestId("employees.edit-form.role-select");
+    this.statusSelect = page.getByTestId("employees.edit-form.status-select");
+    this.updateButton = page.getByTestId("employees.edit-form.update-btn");
+    this.cancelButton = page.getByTestId("employees.edit-form.cancel-btn");
   }
 
   async goto(uid: string) {

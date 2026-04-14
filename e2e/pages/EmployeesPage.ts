@@ -13,8 +13,8 @@ export class EmployeesPage {
     this.page = page;
     this.sidebar = new DashboardSidebar(page);
     this.heading = page.getByRole("heading", { name: "Employees", level: 1 });
-    this.addEmployeeButton = page.getByTestId("add-employee-btn");
-    this.employeesTable = page.getByTestId("employees-table");
+    this.addEmployeeButton = page.getByTestId("employees.list.add-btn");
+    this.employeesTable = page.getByTestId("employees.list.table");
     this.deleteConfirmDialog = page.getByRole("dialog");
   }
 
@@ -23,10 +23,10 @@ export class EmployeesPage {
   }
 
   getDeleteButton(rowIndex: number) {
-    return this.employeesTable.getByTestId("delete-employee-btn").nth(rowIndex);
+    return this.employeesTable.getByTestId("employees.list.delete-btn").nth(rowIndex);
   }
 
   getViewButton(rowIndex: number) {
-    return this.employeesTable.getByTestId("view-employee-btn").nth(rowIndex);
+    return this.employeesTable.getByTestId("employees.list.view-btn").nth(rowIndex);
   }
 }

@@ -10,11 +10,11 @@ export class LoginPage {
 
   constructor(page: Page) {
     this.page = page
-    this.emailInput = page.getByTestId('email-input')
-    this.passwordInput = page.getByTestId('password-input')
-    this.signInButton = page.getByTestId('sign-in-btn')
-    this.errorMessage = page.getByTestId('error-message')
-    this.forgotPasswordButton = page.getByTestId('forgot-password-btn')
+    this.emailInput = page.getByTestId('auth.login-form.email-input')
+    this.passwordInput = page.getByTestId('auth.login-form.password-input')
+    this.signInButton = page.getByTestId('auth.login-form.sign-in-btn')
+    this.errorMessage = page.getByTestId('auth.login-form.error-message')
+    this.forgotPasswordButton = page.getByTestId('auth.login-form.forgot-password-btn')
   }
 
   async goto() {

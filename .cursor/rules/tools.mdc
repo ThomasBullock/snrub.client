@@ -17,7 +17,7 @@ alwaysApply: true
 ### E2E Tests
 
 - Add `data-testid` to all interactive elements (buttons, links, inputs, selects, modals, toggles).
-- Format: `data-testid="<context>-<element>"` e.g. `data-testid="login-submit-btn"`, `data-testid="sidebar-nav-dashboard"`, `data-testid="login-email-input"`.
+- Follow the dot-notation convention defined in `data-testid-convention.mdc`: `domain.component.element-type` e.g. `auth.login-form.email-input`, `nav.sidebar.home-link`, `employees.list.add-btn`.
 - `data-testid` must be stable and not derived from dynamic content (no IDs, indices, or user-generated strings).
 - E2E tests live in `e2e/`. Use Playwright selectors via `getByTestId()`.
 

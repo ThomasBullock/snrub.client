@@ -27,7 +27,7 @@
                   :disabled="isUserEditMode"
                   type="email"
                   class="w-full"
-                  data-testid="email-input"
+                  data-testid="employees.edit-form.email-input"
                   :invalid="v$.email.$error"
                   @blur="v$.email.$touch()"
                 />
@@ -43,7 +43,7 @@
                   v-model="formData.name"
                   type="text"
                   class="w-full"
-                  data-testid="name-input"
+                  data-testid="employees.edit-form.name-input"
                   :invalid="v$.name.$error"
                   @blur="v$.name.$touch()"
                 />
@@ -63,7 +63,7 @@
                   option-value="value"
                   placeholder="Select a role"
                   class="w-full"
-                  data-testid="role-select"
+                  data-testid="employees.edit-form.role-select"
                   :invalid="v$.role.$error"
                   @blur="v$.role.$touch()"
                 />
@@ -85,7 +85,7 @@
                   option-value="value"
                   placeholder="Select employee status"
                   class="w-full"
-                  data-testid="status-select"
+                  data-testid="employees.edit-form.status-select"
                   :invalid="v$.status.$error"
                   @blur="v$.status.$touch()"
                 />
@@ -131,7 +131,7 @@
             <Button
               label="Update Profile"
               severity="primary"
-              data-testid="update-employee-btn"
+              data-testid="employees.edit-form.update-btn"
               :disabled="v$.$invalid"
               @click="handleSubmit"
             />
@@ -139,7 +139,7 @@
               label="Cancel"
               severity="secondary"
               variant="outlined"
-              data-testid="cancel-btn"
+              data-testid="employees.edit-form.cancel-btn"
               @click="handleCancel"
             />
           </div>

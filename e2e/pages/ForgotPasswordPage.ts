@@ -9,10 +9,10 @@ export class ForgotPasswordPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.emailInput = page.getByTestId("email-input");
-    this.resetPasswordButton = page.getByTestId("reset-password-btn");
-    // this.errorMessage = page.getByTestId("error-message");
-    this.backToLoginButton = page.getByTestId("back-to-login-btn");
+    this.emailInput = page.getByTestId("auth.forgot-password-form.email-input");
+    this.resetPasswordButton = page.getByTestId("auth.forgot-password-form.submit-btn");
+    // this.errorMessage = page.getByTestId("auth.login-form.error-message");
+    this.backToLoginButton = page.getByTestId("auth.forgot-password-form.back-to-login-btn");
   }
 
   async goto() {

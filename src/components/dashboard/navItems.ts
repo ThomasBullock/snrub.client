@@ -8,29 +8,29 @@ interface NavItem {
 }
 
 export const navItems: NavItem[] = [
-  { label: "Home", icon: "pi pi-home", testId: "sidebar-home-link", to: { name: "dashboardHome" } },
+  { label: "Home", icon: "pi pi-home", testId: "nav.sidebar.home-link", to: { name: "dashboardHome" } },
   {
     label: "Employees",
     icon: "pi pi-users",
-    testId: "sidebar-employees-link",
+    testId: "nav.sidebar.employees-link",
     to: { name: "employees" },
   },
   {
     label: "Incidents",
     icon: "pi pi-exclamation-triangle",
-    testId: "sidebar-incidents-link",
+    testId: "nav.sidebar.incidents-link",
     to: { name: "incidents" },
   },
   {
     label: "Design",
     icon: "pi pi-palette",
-    testId: "sidebar-design-link",
+    testId: "nav.sidebar.design-link",
     to: { name: "designForm" },
   },
   {
     label: "Reporting",
     icon: "pi pi-chart-line",
-    testId: "sidebar-reporting-link",
+    testId: "nav.sidebar.reporting-link",
     to: { name: "reporting" },
   },
 ];

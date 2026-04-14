@@ -6,7 +6,7 @@
       <Button
         v-if="authStore.isAdmin"
         label="Add Employee"
-        data-testid="add-employee-btn"
+        data-testid="employees.list.add-btn"
         icon="pi pi-plus"
         @click="router.push({ name: 'employeeCreate' })"
         severity="primary"
@@ -14,7 +14,7 @@
     </div>
 
     <DataTable
-      data-testid="employees-table"
+      data-testid="employees.list.table"
       :value="allUsers"
       class="shadow-sm rounded-2xl overflow-hidden"
     >
@@ -38,7 +38,7 @@
             <Button
               v-if="authStore.isSuperAdmin"
               icon="pi pi-trash"
-              data-testid="delete-employee-btn"
+              data-testid="employees.list.delete-btn"
               @click="handleShowDeleteDialog(slotProps.data.uid)"
               severity="secondary"
               variant="text"
@@ -46,7 +46,7 @@
             />
             <Button
               icon="pi pi-eye"
-              data-testid="view-employee-btn"
+              data-testid="employees.list.view-btn"
               @click="router.push({ name: 'employeeDetail', params: { uid: slotProps.data.uid } })"
               severity="secondary"
               variant="text"
