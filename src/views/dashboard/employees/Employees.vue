@@ -2,19 +2,19 @@
   <div class="px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8 bg-surface-50 dark:bg-surface-950">
     <!-- Header with Add User Button -->
     <div class="mb-4 flex justify-between items-center">
-      <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">Team</h1>
+      <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">Employees</h1>
       <Button
         v-if="authStore.isAdmin"
-        label="Add User"
-        data-testid="add-user-btn"
+        label="Add Employee"
+        data-testid="employees.list.add-btn"
         icon="pi pi-plus"
-        @click="router.push({ name: 'teamMemberCreate' })"
+        @click="router.push({ name: 'employeeCreate' })"
         severity="primary"
       />
     </div>
 
     <DataTable
-      data-testid="users-table"
+      data-testid="employees.list.table"
       :value="allUsers"
       class="shadow-sm rounded-2xl overflow-hidden"
     >
@@ -38,7 +38,7 @@
             <Button
               v-if="authStore.isSuperAdmin"
               icon="pi pi-trash"
-              data-testid="delete-user-btn"
+              data-testid="employees.list.delete-btn"
               @click="handleShowDeleteDialog(slotProps.data.uid)"
               severity="secondary"
               variant="text"
@@ -46,8 +46,8 @@
             />
             <Button
               icon="pi pi-eye"
-              data-testid="view-user-btn"
-              @click="router.push({ name: 'teamMemberDetail', params: { uid: slotProps.data.uid } })"
+              data-testid="employees.list.view-btn"
+              @click="router.push({ name: 'employeeDetail', params: { uid: slotProps.data.uid } })"
               severity="secondary"
               variant="text"
               rounded
@@ -72,12 +72,12 @@
 
     <DeleteConfirmDialog
       :is-visible="showDeleteConfirmDialog"
-      header="Delete User"
+      header="Delete Employee"
       confirm-button-label="Delete"
       @handle-close="showDeleteConfirmDialog = false"
       @handle-delete="handleDelete"
     >
-      <p>Are you sure you want to delete this user? This action cannot be undone.</p>
+      <p>Are you sure you want to delete this employee? This action cannot be undone.</p>
     </DeleteConfirmDialog>
   </div>
 </template>
@@ -92,14 +92,13 @@ import DeleteConfirmDialog from "@/components/dialogs/DeleteConfirmDialog.vue";
 import { useUsersStore } from "@/stores/users";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import type { MenuItem } from "primevue/menuitem";
 
 const router = useRouter();
 const usersStore = useUsersStore();
 const authStore = useAuthStore();
-const allUsers = usersStore.getAllUsers;
-
+const allUsers = computed(() => usersStore.getAllUsers);
 const showDeleteConfirmDialog = ref(false);
 const selectedUserUid = ref<string | null>(null);
 
@@ -121,7 +120,7 @@ function toggleActionMenu(event: Event, rowData: { uid: string }) {
     {
       label: "View",
       icon: "pi pi-eye",
-      command: () => router.push({ name: "teamMemberDetail", params: { uid: rowData.uid } }),
+      command: () => router.push({ name: "employeeDetail", params: { uid: rowData.uid } }),
     },
   ];
   actionMenuRef.value?.toggle(event);

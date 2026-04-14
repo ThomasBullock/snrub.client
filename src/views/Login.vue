@@ -20,7 +20,7 @@
             type="text"
             placeholder="Email address"
             class="w-full mb-4 p-4"
-            data-testid="email-input"
+            data-testid="auth.login-form.email-input"
           />
 
           <label for="password2" class="block text-surface-900 dark:text-surface-0 font-medium mb-2"
@@ -33,7 +33,7 @@
             placeholder="Password"
             class="w-full mb-4 p-4"
             autocomplete="off"
-            data-testid="password-input"
+            data-testid="auth.login-form.password-input"
           />
 
           <div class="flex items-center justify-between mb-12">
@@ -45,7 +45,7 @@
               variant="text"
               as="router-link"
               to="/auth/forgot-password"
-              data-testid="forgot-password-btn"
+              data-testid="auth.login-form.forgot-password-btn"
             >
             </Button>
           </div>
@@ -57,7 +57,7 @@
           severity="primary"
           icon="pi pi-user"
           class="w-full p-4"
-          data-testid="sign-in-btn"
+          data-testid="auth.login-form.sign-in-btn"
         />
         <div class="flex justify-between gap-2 mt-4">
           <Button
@@ -69,7 +69,7 @@
           />
         </div>
       </div>
-      <Message v-if="errorMessage" class="mt-4" severity="error" size="small" data-testid="error-message">{{
+      <Message v-if="errorMessage" class="mt-4" severity="error" size="small" data-testid="auth.login-form.error-message">{{
         errorMessage
       }}</Message>
     </div>

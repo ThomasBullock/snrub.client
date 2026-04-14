@@ -29,7 +29,7 @@
         >
         <InputText
           id="email2"
-          data-testid="email-input"
+          data-testid="auth.forgot-password-form.email-input"
           v-model="email"
           type="text"
           placeholder="Email address"
@@ -39,7 +39,7 @@
         <div class="flex items-center justify-end mb-12">
           <Button
             class="font-medium no-underline ml-2 text-primary text-right"
-            data-testid="back-to-login-btn"
+            data-testid="auth.forgot-password-form.back-to-login-btn"
             label="Back to Login"
             severity="secondary"
             variant="text"
@@ -52,7 +52,7 @@
         <Button
           @click="handleReset"
           label="Reset Password"
-          data-testid="reset-password-btn"
+          data-testid="auth.forgot-password-form.submit-btn"
           severity="primary"
           icon="pi pi-user"
           class="w-full p-4"

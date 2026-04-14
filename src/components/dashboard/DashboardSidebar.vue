@@ -34,7 +34,7 @@
           @click="$emit('logout')"
           class="cursor-pointer inline-flex items-center justify-center text-surface-400 hover:text-surface-0 transition-colors duration-150"
           title="Logout"
-          data-testid="sidebar-logout-btn"
+          data-testid="nav.sidebar.logout-btn"
         >
           <i class="pi pi-sign-out text-xl" />
         </a>

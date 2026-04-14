@@ -1,0 +1,53 @@
+---
+description: All application routes and their view components
+alwaysApply: true
+---
+
+# Routes
+
+Defined in `src/router/index.ts`. Auth guard redirects unauthenticated users to `Login`. `requiresSuperAdmin` meta redirects non-super-admins to `employees`.
+
+## Public
+
+| Path | Name | View |
+|------|------|------|
+| `/` | `home` | `views/HomeView.vue` |
+| `/signup` | `signup` | `views/Signup.vue` |
+| `/auth` | `auth` | `views/auth/AuthIndex.vue` (layout) |
+| `/auth/login` | `Login` | `views/Login.vue` |
+| `/auth/forgot-password` | `forgotPassword` | `views/ForgotPassword.vue` |
+| `/auth/callback` | `Callback` | `views/auth/AuthCallback.vue` |
+| `/auth/reset-password` | `resetPassword` | `views/auth/ResetPassword.vue` |
+
+## Dashboard (authenticated)
+
+Layout: `views/dashboard/DashboardIndex.vue`
+
+| Path | Name | View | Notes |
+|------|------|------|-------|
+| `/dashboard` | `dashboardHome` | `views/dashboard/DashboardHome.vue` | |
+| `/dashboard/employees` | `employees` | `views/dashboard/employees/Employees.vue` | |
+| `/dashboard/employees/new` | `employeeCreate` | `views/dashboard/employees/EmployeeNew.vue` | `requiresSuperAdmin` |
+| `/dashboard/employees/:uid` | `employeeDetail` | `views/dashboard/employees/EmployeeDetail.vue` | |
+| `/dashboard/employees/:uid/edit` | `employeeEdit` | `views/dashboard/employees/EmployeeEdit.vue` | |
+| `/dashboard/incidents` | `incidents` | `views/dashboard/incidents/IncidentsDashboard.vue` | |
+| `/dashboard/incidents/reports` | `incidentReports` | `views/dashboard/incidents/IncidentReports.vue` | |
+| `/dashboard/incidents/reports/new` | `incidentReportCreate` | `views/dashboard/incidents/IncidentReportCreate.vue` | |
+| `/dashboard/incidents/reports/:uid` | `incidentReportDetail` | `views/dashboard/incidents/IncidentReportDetail.vue` | |
+| `/dashboard/incidents/reports/:uid/edit` | `incidentReportEdit` | `views/dashboard/incidents/IncidentReportEdit.vue` | |
+| `/dashboard/incidents/types` | `incidentTypes` | `views/dashboard/incidents/IncidentTypes.vue` | |
+| `/dashboard/reporting` | `reporting` | `views/dashboard/reporting/Reporting.vue` | |
+
+## Design (authenticated)
+
+Layout: `views/dashboard/design/DesignIndex.vue`
+
+| Path | Name | View |
+|------|------|------|
+| `/dashboard/design/form` | `designForm` | `views/dashboard/design/Form.vue` |
+| `/dashboard/design/button` | `designButton` | `views/dashboard/design/Button.vue` |
+| `/dashboard/design/data` | `designData` | `views/dashboard/design/Data.vue` |
+| `/dashboard/design/panel` | `designPanel` | `views/dashboard/design/Panel.vue` |
+| `/dashboard/design/overlay` | `designOverlay` | `views/dashboard/design/Overlay.vue` |
+| `/dashboard/design/messages` | `designMessages` | `views/dashboard/design/Messages.vue` |
+| `/dashboard/design/misc` | `designMisc` | `views/dashboard/design/Misc.vue` |

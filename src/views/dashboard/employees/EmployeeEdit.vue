@@ -1,12 +1,16 @@
 <template>
-  <div class="px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8 bg-surface-50 dark:bg-surface-950 h-screen overflow-y-auto">
+  <div
+    class="px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8 bg-surface-50 dark:bg-surface-950 h-screen overflow-y-auto"
+  >
     <div v-if="isLoading" class="flex justify-center py-20">
       <ProgressSpinner />
     </div>
 
     <template v-else>
       <div class="mb-6">
-        <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">Edit Team Member</h1>
+        <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">
+          Edit Employee Details
+        </h1>
       </div>
 
       <div class="bg-surface-0 dark:bg-surface-900 p-7 shadow rounded-2xl flex-auto xl:w-3/4">
@@ -23,7 +27,7 @@
                   :disabled="isUserEditMode"
                   type="email"
                   class="w-full"
-                  data-testid="email-input"
+                  data-testid="employees.edit-form.email-input"
                   :invalid="v$.email.$error"
                   @blur="v$.email.$touch()"
                 />
@@ -39,7 +43,7 @@
                   v-model="formData.name"
                   type="text"
                   class="w-full"
-                  data-testid="name-input"
+                  data-testid="employees.edit-form.name-input"
                   :invalid="v$.name.$error"
                   @blur="v$.name.$touch()"
                 />
@@ -59,7 +63,7 @@
                   option-value="value"
                   placeholder="Select a role"
                   class="w-full"
-                  data-testid="role-select"
+                  data-testid="employees.edit-form.role-select"
                   :invalid="v$.role.$error"
                   @blur="v$.role.$touch()"
                 />
@@ -70,7 +74,7 @@
 
               <div class="flex flex-col gap-2">
                 <label for="userStatus" class="text-surface-900 dark:text-surface-0"
-                  >User Status *</label
+                  >Employee Status *</label
                 >
                 <Select
                   id="userStatus"
@@ -79,9 +83,9 @@
                   :options="userStatusOptions"
                   option-label="label"
                   option-value="value"
-                  placeholder="Select user status"
+                  placeholder="Select employee status"
                   class="w-full"
-                  data-testid="status-select"
+                  data-testid="employees.edit-form.status-select"
                   :invalid="v$.status.$error"
                   @blur="v$.status.$touch()"
                 />
@@ -103,7 +107,7 @@
                 <img
                   v-else
                   :src="getUserAvatar"
-                  alt="User avatar"
+                  alt="Employee avatar"
                   class="h-32 w-32 rounded-lg object-cover border border-surface-300"
                 />
                 <FileUpload
@@ -127,7 +131,7 @@
             <Button
               label="Update Profile"
               severity="primary"
-              data-testid="update-user-btn"
+              data-testid="employees.edit-form.update-btn"
               :disabled="v$.$invalid"
               @click="handleSubmit"
             />
@@ -135,7 +139,7 @@
               label="Cancel"
               severity="secondary"
               variant="outlined"
-              data-testid="cancel-btn"
+              data-testid="employees.edit-form.cancel-btn"
               @click="handleCancel"
             />
           </div>
@@ -226,7 +230,7 @@ const rules = {
     required: helpers.withMessage("Role is required", required),
   },
   status: {
-    required: helpers.withMessage("User status is required", required),
+    required: helpers.withMessage("Employee status is required", required),
   },
 };
 
@@ -292,10 +296,10 @@ async function handleSubmit() {
     toast.add({
       severity: "success",
       summary: "Success",
-      detail: "User has been successfully updated",
+      detail: "Employee has been successfully updated",
       life: 3000,
     });
-    router.push({ name: "teamMemberDetail", params: { uid } });
+    router.push({ name: "employeeDetail", params: { uid } });
   } catch (error) {
     console.error("Error updating user:", error);
     toast.add({
@@ -308,7 +312,7 @@ async function handleSubmit() {
 }
 
 function handleCancel() {
-  router.push({ name: "teamMemberDetail", params: { uid } });
+  router.push({ name: "employeeDetail", params: { uid } });
 }
 
 const getUserAvatar = computed(() => {
