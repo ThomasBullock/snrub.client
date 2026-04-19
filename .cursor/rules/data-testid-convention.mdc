@@ -64,3 +64,89 @@ this.submitButton = page.getByTestId('auth.login-form.sign-in-btn')
 - Embed dynamic values: ~~`data-testid="`employee-${uid}`"`~~
 - Omit any of the three segments: ~~`data-testid="login.email-input"`~~
 - Use underscores or camelCase: ~~`data-testid="auth.loginForm.emailInput"`~~
+
+---
+
+## Registered Test IDs (by view)
+
+Keep this section up to date whenever a new `data-testid` is added or removed.
+
+### Navigation — `src/components/dashboard/DashboardSidebar.vue` · `src/components/dashboard/navItems.ts`
+
+| Test ID | Element |
+|---|---|
+| `nav.sidebar.home-link` | Home nav link |
+| `nav.sidebar.employees-link` | Employees nav link |
+| `nav.sidebar.incidents-link` | Incidents nav link |
+| `nav.sidebar.design-link` | Design nav link |
+| `nav.sidebar.reporting-link` | Reporting nav link |
+| `nav.sidebar.reactor-monitoring-link` | Reactor Monitoring nav link |
+| `nav.sidebar.logout-btn` | Logout button |
+
+### Auth — `src/views/Login.vue`
+
+| Test ID | Element |
+|---|---|
+| `auth.login-form.email-input` | Email input |
+| `auth.login-form.password-input` | Password input |
+| `auth.login-form.forgot-password-btn` | Forgot password link-button |
+| `auth.login-form.sign-in-btn` | Sign in submit button |
+| `auth.login-form.error-message` | Inline error message |
+
+### Auth — `src/views/ForgotPassword.vue`
+
+| Test ID | Element |
+|---|---|
+| `auth.forgot-password-form.email-input` | Email input |
+| `auth.forgot-password-form.back-to-login-btn` | Back to login button |
+| `auth.forgot-password-form.submit-btn` | Submit button |
+
+### Employees — `src/views/dashboard/employees/Employees.vue`
+
+| Test ID | Element |
+|---|---|
+| `employees.list.add-btn` | Add employee button |
+| `employees.list.table` | Employees data table |
+| `employees.list.delete-btn` | Per-row delete button |
+| `employees.list.view-btn` | Per-row view/detail button |
+
+### Employees — `src/views/dashboard/employees/EmployeeDetail.vue`
+
+| Test ID | Element |
+|---|---|
+| `employees.detail.edit-btn` | Edit button |
+| `employees.detail.name` | Employee name display |
+| `employees.detail.email` | Employee email display |
+| `employees.detail.role` | Employee role tag |
+| `employees.detail.status` | Employee status tag |
+| `employees.detail.back-btn` | Back button |
+
+### Employees — `src/views/dashboard/employees/EmployeeNew.vue`
+
+| Test ID | Element |
+|---|---|
+| `employees.new-form.email-input` | Email input |
+| `employees.new-form.name-input` | Name input |
+| `employees.new-form.role-select` | Role dropdown |
+| `employees.new-form.status-select` | Status dropdown |
+| `employees.new-form.password-input` | Password input |
+| `employees.new-form.create-btn` | Create employee submit button |
+| `employees.new-form.cancel-btn` | Cancel button |
+
+### Employees — `src/views/dashboard/employees/EmployeeEdit.vue`
+
+| Test ID | Element |
+|---|---|
+| `employees.edit-form.email-input` | Email input |
+| `employees.edit-form.name-input` | Name input |
+| `employees.edit-form.role-select` | Role dropdown |
+| `employees.edit-form.status-select` | Status dropdown |
+| `employees.edit-form.update-btn` | Update/save button |
+| `employees.edit-form.cancel-btn` | Cancel button |
+
+### Incidents — `src/views/dashboard/incidents/IncidentTypes.vue`
+
+| Test ID | Element |
+|---|---|
+| `incidents.types.category-group` | Category group container |
+| `incidents.types.table` | Incident types data table |
